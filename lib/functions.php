@@ -96,6 +96,22 @@ namespace  {
         );
     }
 
+    function context()
+    {
+        return call_user_func_array(
+            array('\Matura\Core\Builder','describe'),
+            func_get_args()
+        );
+    }
+
+    function xcontext()
+    {
+        return call_user_func_array(
+            array('\Matura\Core\Builder','xdescribe'),
+            func_get_args()
+        );
+    }
+
     function expect()
     {
         return call_user_func_array(

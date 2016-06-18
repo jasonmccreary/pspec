@@ -30,6 +30,8 @@ class Matura
         'xafter_all',
         'describe',
         'xdescribe',
+        'context',
+        'xcontext',
         'expect',
         'skip'
     );
