@@ -9,7 +9,7 @@ class BeforeAllHook extends HookMethod
 
     public function invoke()
     {
-        if($this->invoked) {
+        if ($this->invoked) {
             return $this->result;
         } else {
             $this->result = $this->invokeWithin($this->fn, array($this->createContext()));
@@ -20,11 +20,10 @@ class BeforeAllHook extends HookMethod
 
     public function createContext()
     {
-        if($this->context) {
+        if ($this->context) {
             return $this->context;
         } else {
             return parent::createContext();
         }
     }
-
 }

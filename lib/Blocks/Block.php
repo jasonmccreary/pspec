@@ -83,7 +83,7 @@ abstract class Block
      */
     public function hasSkippedAncestors()
     {
-        foreach($this->ancestors() as $ancestor) {
+        foreach ($this->ancestors() as $ancestor) {
             if ($ancestor->isSkipped()) {
                 return true;
             }

@@ -7,7 +7,7 @@ use Iterator;
  * Used to filter paths by their basename and pathname. Assumes it's iterating
  * over SplFileInfo objects.
  */
-class FilePathIterator extends  FilterIterator
+class FilePathIterator extends FilterIterator
 {
     private $basename_include;
     private $basename_exclude;
@@ -16,8 +16,7 @@ class FilePathIterator extends  FilterIterator
         Iterator $iterator,
         $basename_include = Defaults::MATCH_ALL,
         $basename_exclude = Defaults::EXCLUDE
-    )
-    {
+    ) {
         parent::__construct($iterator);
         $this->basename_include = $basename_include;
         $this->basename_exclude = $basename_exclude;
@@ -31,4 +30,3 @@ class FilePathIterator extends  FilterIterator
 
     }
 }
-

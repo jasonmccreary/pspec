@@ -112,7 +112,7 @@ class InvocationContext
     {
         $active_block = static::getActive();
         $current = get_class($active_block->activeBlock());
-        if ( !is_a($active_block->activeBlock(), $type)) {
+        if (!is_a($active_block->activeBlock(), $type)) {
             throw new Exception("Improperly nested block. Expected a $type, got a $current");
         }
         return $active_block;

@@ -104,7 +104,7 @@ class Builder
      * Adds a before_all callback to the active block. The active block should
      * generally be a describe block.
      */
-    public static function before_all($fn)
+    public static function beforeAll($fn)
     {
         $test_method = new BeforeAllHook(InvocationContext::getActive(), $fn);
         $test_method->addToParent();
@@ -118,7 +118,7 @@ class Builder
         return $test_method;
     }
 
-    public static function after_all($fn)
+    public static function afterAll($fn)
     {
         $test_method = new AfterAllHook(InvocationContext::getActive(), $fn);
         $test_method->addToParent();

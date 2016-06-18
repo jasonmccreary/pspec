@@ -10,7 +10,7 @@ class TestMethod extends Method
     public function collectOrderedBefores()
     {
         $befores = array();
-        $this->traversePost(function ($block)  use (&$befores) {
+        $this->traversePost(function ($block) use (&$befores) {
             $befores = array_merge($befores, $block->befores());
         });
         return $befores;
@@ -19,7 +19,7 @@ class TestMethod extends Method
     public function collectOrderedAfters()
     {
         $afters = array();
-        $this->traversePre(function ($block)  use (&$afters) {
+        $this->traversePre(function ($block) use (&$afters) {
             $afters = array_merge($afters, $block->afters());
         });
         return $afters;
@@ -27,7 +27,7 @@ class TestMethod extends Method
 
     public function aroundEach($fn)
     {
-        foreach(array_merge(
+        foreach (array_merge(
             $this->collectOrderedBefores(),
             array($this),
             $this->collectOrderedAfters()
@@ -40,7 +40,9 @@ class TestMethod extends Method
     {
         if ($this->hasSkippedAncestors()) {
             return $this->invokeWithin(
-                function() { throw New SkippedException(); },
+                function () {
+                    throw new SkippedException();
+                },
                 array($this->createContext())
             );
         } else {

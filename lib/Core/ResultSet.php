@@ -91,7 +91,7 @@ class ResultSet implements ResultComponent, IteratorAggregate
 
     public function isSkipped()
     {
-      return $this->totalSkipped() > 0;
+        return $this->totalSkipped() > 0;
     }
 
     public function getFailures()
@@ -123,11 +123,11 @@ class ResultSet implements ResultComponent, IteratorAggregate
 
     public function getStatus()
     {
-        if($this->isFailure()) {
+        if ($this->isFailure()) {
             return Result::FAILURE;
-        } else if($this->isSkipped()) {
+        } elseif ($this->isSkipped()) {
             return Result::SKIPPED;
-        } else if($this->isSuccessful()) { // isSuccess seems more correct.
+        } elseif ($this->isSuccessful()) { // isSuccess seems more correct.
             return Result::SUCCESS;
         } else {
             return Result::INCOMPLETE;

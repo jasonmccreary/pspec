@@ -153,11 +153,12 @@ class Result implements ResultComponent
         }
     }
 
-    public function getWithFilter($fn) {
-      if($fn($this)) {
-          return array($this);
-      } else {
-          return array();
-      }
+    public function getWithFilter($fn)
+    {
+        if ($fn($this)) {
+            return array($this);
+        } else {
+            return array();
+        }
     }
 }
