@@ -68,17 +68,6 @@ class Builder
     }
 
     /**
-     * Begins a new test suite. The test suite instantiates a new invocation
-     * context.
-     */
-    public static function suite($name, $fn)
-    {
-        $suite = new Suite(new InvocationContext(), $fn, $name);
-        $suite->build();
-        return $suite;
-    }
-
-    /**
      * Begins a new test case within the active block.
      */
     public static function it($name, $fn)

@@ -18,8 +18,6 @@ class Matura
      *  DSL.
      */
     protected static $method_names = array(
-        'suite',
-        'xsuite',
         'it',
         'xit',
         'before_all',

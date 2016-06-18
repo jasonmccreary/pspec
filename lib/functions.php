@@ -1,21 +1,5 @@
 <?php
 namespace  {
-    function suite()
-    {
-        return call_user_func_array(
-            array('\Matura\Core\Builder','suite'),
-            func_get_args()
-        );
-    }
-
-    function xsuite()
-    {
-        return call_user_func_array(
-            array('\Matura\Core\Builder','xsuite'),
-            func_get_args()
-        );
-    }
-
     function it()
     {
         return call_user_func_array(
