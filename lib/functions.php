@@ -1,7 +1,5 @@
 <?php
-// Auto-generated with Matura::exportDSL()
 namespace  {
-    
     function suite()
     {
         return call_user_func_array(
@@ -129,5 +127,4 @@ namespace  {
             func_get_args()
         );
     }
-
 }
