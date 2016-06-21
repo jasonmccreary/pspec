@@ -10,12 +10,12 @@
     ],
     "bin" : [ "bin/mat" ],
     "require": {
-        "jacobstr/esperance": "~0.1",
-        "symfony/console": "~2"
+        "esperance/esperance": "dev-master",
+        "symfony/console": "^3.1"
     },
     "require-dev": {
-        "mockery/mockery": "dev-master",
-        "mover-io/belt": "~1.0"
+        "mover-io/belt": "~1.0",
+        "mockery/mockery": "^0.9.5"
     },
     "autoload" : {
         "psr-4": {
