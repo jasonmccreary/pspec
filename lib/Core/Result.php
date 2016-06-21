@@ -147,18 +147,18 @@ class Result implements ResultComponent
     public function getFailures()
     {
         if ($this->isFailure()) {
-            return array($this);
+            return [$this];
         } else {
-            return array();
+            return [];
         }
     }
 
     public function getWithFilter($fn)
     {
         if ($fn($this)) {
-            return array($this);
+            return [$this];
         } else {
-            return array();
+            return [];
         }
     }
 }

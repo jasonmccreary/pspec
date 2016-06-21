@@ -10,7 +10,7 @@ class ResultSet implements ResultComponent, IteratorAggregate
     /**
      * @var ResultComponent[]
      */
-    private $results = array();
+    private $results = [];
 
     /**
      * @var int An iteratively updated test count. Should be equivalent to
@@ -96,7 +96,7 @@ class ResultSet implements ResultComponent, IteratorAggregate
 
     public function getFailures()
     {
-        $failures = array();
+        $failures = [];
         foreach ($this->results as $result) {
             $failures = array_merge($failures, $result->getFailures());
         }
@@ -105,7 +105,7 @@ class ResultSet implements ResultComponent, IteratorAggregate
 
     public function getWithFilter($fn)
     {
-        $collection = array();
+        $collection = [];
         foreach ($this->results as $result) {
             $collection = array_merge($collection, $result->getWithFilter($fn));
         }
@@ -114,7 +114,7 @@ class ResultSet implements ResultComponent, IteratorAggregate
 
     public function getExceptions()
     {
-        $exceptions = array();
+        $exceptions = [];
         foreach ($this->results as $result) {
             $exceptions = array_merge($exceptions, $result->getExceptions());
         }

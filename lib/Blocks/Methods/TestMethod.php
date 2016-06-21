@@ -9,7 +9,7 @@ class TestMethod extends Method
 {
     public function collectOrderedBefores()
     {
-        $befores = array();
+        $befores = [];
         $this->traversePost(function ($block) use (&$befores) {
             $befores = array_merge($befores, $block->befores());
         });
@@ -18,7 +18,7 @@ class TestMethod extends Method
 
     public function collectOrderedAfters()
     {
-        $afters = array();
+        $afters = [];
         $this->traversePre(function ($block) use (&$afters) {
             $afters = array_merge($afters, $block->afters());
         });
@@ -29,7 +29,7 @@ class TestMethod extends Method
     {
         foreach (array_merge(
             $this->collectOrderedBefores(),
-            array($this),
+            [$this],
             $this->collectOrderedAfters()
         ) as $block) {
             $fn($block);
@@ -43,10 +43,10 @@ class TestMethod extends Method
                 function () {
                     throw new SkippedException();
                 },
-                array($this->createContext())
+                [$this->createContext()]
             );
         } else {
-            return $this->invokeWithin($this->fn, array($this->createContext()));
+            return $this->invokeWithin($this->fn, [$this->createContext()]);
         }
     }
 }

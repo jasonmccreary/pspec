@@ -35,14 +35,14 @@ class SuiteRunner extends Runner
     protected $options;
     protected $suite;
 
-    public function __construct(Suite $suite, ResultSet $result_set, $options = array())
+    public function __construct(Suite $suite, ResultSet $result_set, $options = [])
     {
         $this->suite = $suite;
         $this->result_set = $result_set;
-        $this->options = array_merge(array(
+        $this->options = array_merge([
             'grep' => '//',
             'except' => null,
-        ), $options);
+        ], $options);
     }
 
     /**
@@ -52,21 +52,21 @@ class SuiteRunner extends Runner
     {
         $this->emit(
             'suite.start',
-            array(
+            [
                 'suite' => $this->suite,
                 'result_set' => $this->result_set
-            )
+            ]
         );
 
-        $result = $this->captureAround(array($this, 'runGroup'), $this->suite, $this->suite);
+        $result = $this->captureAround([$this, 'runGroup'], $this->suite, $this->suite);
 
         $this->emit(
             'suite.complete',
-            array(
+            [
                 'suite' => $this->suite,
                 'result' => $result,
                 'result_set' => $this->result_set
-            )
+            ]
         );
 
         if ($result->isFailure()) {
@@ -81,21 +81,21 @@ class SuiteRunner extends Runner
     {
         $this->emit(
             'describe.start',
-            array(
+            [
                 'describe' => $describe,
                 'result_set' => $this->result_set
-            )
+            ]
         );
 
-        $result = $this->captureAround(array($this, 'runGroup'), $describe, $describe);
+        $result = $this->captureAround([$this, 'runGroup'], $describe, $describe);
 
         $this->emit(
             'describe.complete',
-            array(
+            [
                 'describe' => $describe,
                 'result' => $result,
                 'result_set' => $this->result_set
-            )
+            ]
         );
 
         if ($result->isFailure()) {
@@ -134,10 +134,10 @@ class SuiteRunner extends Runner
             return;
         }
 
-        $start_context = array(
+        $start_context = [
             'test' => $test,
             'result_set' => $this->result_set
-        );
+        ];
 
         $this->emit('test.start', $start_context);
 
@@ -150,18 +150,18 @@ class SuiteRunner extends Runner
                 $block->skip('Skipping due to earlier failures.');
             }
 
-            $result = $suite_runner->captureAround(array($block, 'invoke'), $test, $block);
+            $result = $suite_runner->captureAround([$block, 'invoke'], $test, $block);
 
             $test_result_set->addResult($result);
         });
 
         $this->result_set->addResult($test_result_set);
 
-        $complete_context = array(
+        $complete_context = [
             'test' => $test,
             'result' => $test_result_set,
             'result_set' => $this->result_set
-        );
+        ];
 
         $this->emit('test.complete', $complete_context);
 

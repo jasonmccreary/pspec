@@ -17,7 +17,7 @@ class Matura
     /** @var string[] $method_names The method names we magically support in or
      *  DSL.
      */
-    protected static $method_names = array(
+    protected static $method_names = [
         'it',
         'xit',
         'before_all',
@@ -34,7 +34,7 @@ class Matura
         'xcontext',
         'expect',
         'skip'
-    );
+    ];
 
     public static function loadDSL()
     {
@@ -44,7 +44,7 @@ class Matura
     public static function init()
     {
         $error_handler = new ErrorHandler();
-        set_error_handler(array($error_handler, 'handleError'));
+        set_error_handler([$error_handler, 'handleError']);
         static::loadDSL();
     }
 

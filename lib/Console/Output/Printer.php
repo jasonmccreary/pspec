@@ -46,14 +46,14 @@ function pad_right($length, $string, $char = ' ')
  */
 class Printer
 {
-    protected $options = array(
+    protected $options = [
         'trace_depth' => 7,
         'indent' => 3
-    );
+    ];
 
     protected $test_count = 0;
 
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         $this->options = array_merge($this->options, $options);
     }
@@ -70,12 +70,12 @@ class Printer
         $style        = $event->result->getStatusString();
         $status       = $event->result->getStatus();
 
-        $icon_map = array(
+        $icon_map = [
             Result::SUCCESS => '✓',
             Result::FAILURE => '✘',
             Result::SKIPPED => '○',
             Result::INCOMPLETE => '○'
-        );
+        ];
 
         $icon = $icon_map[$status];
 
@@ -87,7 +87,7 @@ class Printer
 
     public function onTestRunComplete(Event $event)
     {
-        $summary = array(
+        $summary = [
             tag("success", "Passed:"),
             "{$event->result_set->totalSuccesses()} of {$event->result_set->totalTests()}",
             tag("skipped", "Skipped:"),
@@ -96,7 +96,7 @@ class Printer
             "{$event->result_set->totalFailures()}",
             tag("bold", "Assertions:"),
             "{$event->result_set->totalAssertions()}"
-        );
+        ];
 
         // The Passed / Failed / Skipped summary
         $summary = implode(" ", $summary);
@@ -106,7 +106,7 @@ class Printer
         $failure_count = count($failures);
 
         $index = 0;
-        $result = array();
+        $result = [];
         foreach ($failures as $failure) {
             $index++;
             $result[] = tag("failure", pad_right(4, "$index )")."FAILURE: ". $failure->getBlock()->path());
@@ -162,24 +162,24 @@ class Printer
 
         return indent(4, implode(
             "\n",
-            array(
+            [
                 tag("info", $exception_category.': ') . $exception->getMessage(),
                 tag("info", "Via:"),
                 $this->formatTrace($exception)
-            )
+            ]
         ));
     }
 
     public function formatTrace(MaturaException $exception)
     {
         $index = 0;
-        $result = array();
+        $result = [];
         $sliced_trace = array_slice($exception->originalTrace(), 0, $this->options['trace_depth']);
 
         foreach ($sliced_trace as $trace) {
             $index++;
 
-            $parts = array(pad_right(4, $index.")"));
+            $parts = [pad_right(4, $index.")")];
 
             if (isset($trace['file'])) {
                 $parts[] = $trace['file'].':'.$trace['line'];
@@ -201,8 +201,8 @@ class Printer
         $parts = array_map('ucfirst', array_filter(preg_split('/_|\./', $event->name)));
         $name = 'on'.implode($parts);
 
-        if (is_callable(array($this, $name))) {
-            return call_user_func(array($this, $name), $event);
+        if (is_callable([$this, $name])) {
+            return call_user_func([$this, $name], $event);
         } else {
             return null;
         }

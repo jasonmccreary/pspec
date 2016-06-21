@@ -12,7 +12,7 @@ class BeforeAllHook extends HookMethod
         if ($this->invoked) {
             return $this->result;
         } else {
-            $this->result = $this->invokeWithin($this->fn, array($this->createContext()));
+            $this->result = $this->invokeWithin($this->fn, [$this->createContext()]);
             $this->invoked = true;
             return $this->result;
         }

@@ -8,7 +8,7 @@ use Matura\Exceptions\Exception;
 class Error extends Exception
 {
     // http://www.php.net/manual/en/errorfunc.constants.php
-    public static $error_names = array(
+    public static $error_names = [
         /*     1 */ E_ERROR             => 'E_ERROR',
         /*     2 */ E_WARNING           => 'E_WARNING',
         /*     4 */ E_PARSE             => 'E_PARSE',
@@ -24,7 +24,7 @@ class Error extends Exception
         /*  4096 */ E_RECOVERABLE_ERROR => 'E_RECOVERABLE_ERROR',
         /*  8192 */ E_DEPRECATED        => 'E_DEPRECATED',
         /* 16384 */ E_USER_DEPRECATED   => 'E_USER_DEPRECATED'
-    );
+    ];
 
     protected $errno;
     protected $errstr;

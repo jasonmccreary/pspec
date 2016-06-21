@@ -3,7 +3,7 @@ namespace  {
     function it()
     {
         return call_user_func_array(
-            array('\Matura\Core\Builder','it'),
+            ['\Matura\Core\Builder','it'],
             func_get_args()
         );
     }
@@ -11,7 +11,7 @@ namespace  {
     function xit()
     {
         return call_user_func_array(
-            array('\Matura\Core\Builder','xit'),
+            ['\Matura\Core\Builder','xit'],
             func_get_args()
         );
     }
@@ -19,7 +19,7 @@ namespace  {
     function before_all()
     {
         return call_user_func_array(
-            array('\Matura\Core\Builder', 'beforeAll'),
+            ['\Matura\Core\Builder', 'beforeAll'],
             func_get_args()
         );
     }
@@ -27,7 +27,7 @@ namespace  {
     function xbefore_all()
     {
         return call_user_func_array(
-            array('\Matura\Core\Builder','xbefore_all'),
+            ['\Matura\Core\Builder','xbefore_all'],
             func_get_args()
         );
     }
@@ -35,7 +35,7 @@ namespace  {
     function before()
     {
         return call_user_func_array(
-            array('\Matura\Core\Builder','before'),
+            ['\Matura\Core\Builder','before'],
             func_get_args()
         );
     }
@@ -43,7 +43,7 @@ namespace  {
     function xbefore()
     {
         return call_user_func_array(
-            array('\Matura\Core\Builder','xbefore'),
+            ['\Matura\Core\Builder','xbefore'],
             func_get_args()
         );
     }
@@ -51,7 +51,7 @@ namespace  {
     function after()
     {
         return call_user_func_array(
-            array('\Matura\Core\Builder','after'),
+            ['\Matura\Core\Builder','after'],
             func_get_args()
         );
     }
@@ -59,7 +59,7 @@ namespace  {
     function xafter()
     {
         return call_user_func_array(
-            array('\Matura\Core\Builder','xafter'),
+            ['\Matura\Core\Builder','xafter'],
             func_get_args()
         );
     }
@@ -67,7 +67,7 @@ namespace  {
     function after_all()
     {
         return call_user_func_array(
-            array('\Matura\Core\Builder', 'afterAll'),
+            ['\Matura\Core\Builder', 'afterAll'],
             func_get_args()
         );
     }
@@ -75,7 +75,7 @@ namespace  {
     function xafter_all()
     {
         return call_user_func_array(
-            array('\Matura\Core\Builder','xafter_all'),
+            ['\Matura\Core\Builder','xafter_all'],
             func_get_args()
         );
     }
@@ -83,7 +83,7 @@ namespace  {
     function describe()
     {
         return call_user_func_array(
-            array('\Matura\Core\Builder','describe'),
+            ['\Matura\Core\Builder','describe'],
             func_get_args()
         );
     }
@@ -91,7 +91,7 @@ namespace  {
     function xdescribe()
     {
         return call_user_func_array(
-            array('\Matura\Core\Builder','xdescribe'),
+            ['\Matura\Core\Builder','xdescribe'],
             func_get_args()
         );
     }
@@ -99,7 +99,7 @@ namespace  {
     function context()
     {
         return call_user_func_array(
-            array('\Matura\Core\Builder','describe'),
+            ['\Matura\Core\Builder','describe'],
             func_get_args()
         );
     }
@@ -107,7 +107,7 @@ namespace  {
     function xcontext()
     {
         return call_user_func_array(
-            array('\Matura\Core\Builder','xdescribe'),
+            ['\Matura\Core\Builder','xdescribe'],
             func_get_args()
         );
     }
@@ -115,7 +115,7 @@ namespace  {
     function expect()
     {
         return call_user_func_array(
-            array('\Matura\Core\Builder','expect'),
+            ['\Matura\Core\Builder','expect'],
             func_get_args()
         );
     }
@@ -123,7 +123,7 @@ namespace  {
     function skip()
     {
         return call_user_func_array(
-            array('\Matura\Core\Builder','skip'),
+            ['\Matura\Core\Builder','skip'],
             func_get_args()
         );
     }

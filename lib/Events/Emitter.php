@@ -2,6 +2,6 @@
 
 interface Emitter
 {
-    public function emit($name, $arguments = array());
+    public function emit($name, $arguments = []);
     public function addListener(Listener $listener);
 }

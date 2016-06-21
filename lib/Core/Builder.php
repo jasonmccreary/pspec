@@ -123,7 +123,7 @@ class Builder
     {
         list($name, $skip) = self::getNameAndSkipFlag($name);
 
-        $block = call_user_func_array(array('static', $name), $arguments);
+        $block = call_user_func_array(['static', $name], $arguments);
 
         if ($skip) {
             $block->skip('x-ed out');
@@ -150,9 +150,9 @@ class Builder
     protected static function getNameAndSkipFlag($name)
     {
         if ($name[0] == 'x') {
-            return array(substr($name, 1), true);
+            return [substr($name, 1), true];
         } else {
-            return array(self::$method_map[$name], false);
+            return [self::$method_map[$name], false];
         }
     }
 }

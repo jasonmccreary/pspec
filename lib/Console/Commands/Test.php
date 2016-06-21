@@ -21,9 +21,9 @@ use Matura\Matura;
 
 class Test extends Command implements Listener
 {
-    private $defaults = array(
+    private $defaults = [
         'trace_depth' => 7
-    );
+    ];
 
     protected function configure()
     {
@@ -91,7 +91,7 @@ class Test extends Command implements Listener
 
         $output->getFormatter()->setStyle(
             'u',
-            new OutputFormatterStyle(null, null, array('underscore'))
+            new OutputFormatterStyle(null, null, ['underscore'])
         );
 
         $output->getFormatter()->setStyle(
@@ -108,9 +108,9 @@ class Test extends Command implements Listener
         // ################
         $path = $input->getArgument('path');
 
-        $printer_options = array(
+        $printer_options = [
             'trace_depth' => $input->getOption('trace_depth') ?: $this->defaults['trace_depth']
-        );
+        ];
 
         // Configure Output Modules
         // ########################
@@ -120,7 +120,7 @@ class Test extends Command implements Listener
         $this->output = $output;
         $this->printer = $printer;
 
-        $options = array();
+        $options = [];
 
         if ($include = $input->getOption('include')) {
             $options['include'] = "/$include/";

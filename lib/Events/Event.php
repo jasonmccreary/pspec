@@ -2,9 +2,9 @@
 
 class Event
 {
-    protected $context = array();
+    protected $context = [];
 
-    public function __construct($name, $context = array())
+    public function __construct($name, $context = [])
     {
         $this->name = $name;
         $this->context = array_merge($this->context, $context);

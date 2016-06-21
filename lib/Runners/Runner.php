@@ -16,7 +16,7 @@ use Matura\Events\Event;
  */
 abstract class Runner implements Emitter
 {
-    protected $listeners = array();
+    protected $listeners = [];
 
     protected $result_set;
 
@@ -25,7 +25,7 @@ abstract class Runner implements Emitter
         $this->listeners[] = $listener;
     }
 
-    public function emit($name, $arguments = array())
+    public function emit($name, $arguments = [])
     {
         $event = new Event($name, $arguments);
         foreach ($this->listeners as $listener) {
@@ -38,10 +38,10 @@ abstract class Runner implements Emitter
         $parts = array_map('ucfirst', array_filter(preg_split('/_|\./', $event->name)));
         $name = 'on'.implode($parts);
 
-        if (is_callable(array($listener, $name))) {
-            return call_user_func(array($listener, $name), $event);
+        if (is_callable([$listener, $name])) {
+            return call_user_func([$listener, $name], $event);
         } else {
-            return call_user_func(array($listener, 'onMaturaEvent'), $event);
+            return call_user_func([$listener, 'onMaturaEvent'], $event);
         }
     }
 

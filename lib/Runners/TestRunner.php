@@ -30,16 +30,16 @@ use FileSystemIterator;
  */
 class TestRunner extends Runner
 {
-    protected $options = array(
+    protected $options = [
         'include' => Defaults::MATCH_TEST,
         'exclude' => Defaults::MATCH_NONE,
         'grep'    => Defaults::MATCH_ALL
-    );
+    ];
 
     /** @var The directory or folder containing our test file(s). */
     protected $path;
 
-    public function __construct($path, $options = array())
+    public function __construct($path, $options = [])
     {
         $this->path = $path;
         $this->options = array_merge($this->options, $options);
@@ -87,12 +87,11 @@ class TestRunner extends Runner
             $suite->build();
 
             $suite_result = new ResultSet();
-            $suite_runner = new SuiteRunner($suite, $suite_result, array(
+            $suite_runner = new SuiteRunner($suite, $suite_result, [
                 'grep' => $this->options['grep']
-            ));
+            ]);
             $this->result_set->addResult($suite_result);
-
-            // Forward my listeners.
+            
             foreach ($this->listeners as $listener) {
                 $suite_runner->addListener($listener);
             }
@@ -100,7 +99,7 @@ class TestRunner extends Runner
             $suite_runner->run();
         }
 
-        $this->emit('test_run.complete', array('result_set' => $this->result_set));
+        $this->emit('test_run.complete', ['result_set' => $this->result_set]);
 
         return $this->result_set;
     }

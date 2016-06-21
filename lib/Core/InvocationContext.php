@@ -16,7 +16,7 @@ class InvocationContext
      * @var Block[] $stack
      * Call stack within a single InvocationContext - each
      */
-    protected $stack = array();
+    protected $stack = [];
 
     /**
      * @var InvocationContext[] $contexts
@@ -24,7 +24,7 @@ class InvocationContext
      * cases like `test/test_ordering.php` where we create a self-hosted test
      * suite.
      */
-    protected static $contexts = array();
+    protected static $contexts = [];
 
     protected $total_invocations = 0;
 
@@ -66,7 +66,7 @@ class InvocationContext
         $this->total_invocations++;
         $args = array_slice(func_get_args(), 1);
         $this->stack[] = $block;
-        $result = call_user_func_array(array($block,'invoke'), $args);
+        $result = call_user_func_array([$block,'invoke'], $args);
         array_pop($this->stack);
 
         return $result;

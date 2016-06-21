@@ -2,12 +2,12 @@
 
 class ErrorHandler
 {
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
-        $default_options = array(
+        $default_options = [
             'error_reporting' => error_reporting(),
             'error_class' => '\Matura\Exceptions\Error'
-        );
+        ];
 
         $final_options = array_merge($default_options, $options);
 

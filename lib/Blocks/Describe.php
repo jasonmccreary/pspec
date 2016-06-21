@@ -19,7 +19,7 @@ use Matura\Exceptions\Exception as MaturaException;
  */
 class Describe extends Block
 {
-    protected $listeners = array();
+    protected $listeners = [];
 
     /**
      * Finds a single TestMethod or Block with a given Path. We will return

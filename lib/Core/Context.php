@@ -32,7 +32,7 @@ class Context implements IteratorAggregate
 {
 
     /** @var Arbitrary properties. Exposed to the context passed into a test. */
-    private $context = array();
+    private $context = [];
 
     public $block;
 

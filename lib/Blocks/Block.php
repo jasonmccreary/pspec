@@ -29,7 +29,7 @@ abstract class Block
     protected $skipped;
 
     /** @var bool $skipped An array of reasons for skipping a block. */
-    protected $skipped_because = array();
+    protected $skipped_because = [];
 
     /** @var bool $invoked Whether this method has been invoked. */
     protected $invoked = false;
@@ -38,7 +38,7 @@ abstract class Block
     protected $assertions = 0;
 
     /** @var Block[] Child block elements. */
-    protected $children = array();
+    protected $children = [];
 
     public function __construct(InvocationContext $invocation_context, $fn = null, $name = null)
     {
@@ -114,7 +114,7 @@ abstract class Block
      */
     public function getContextChain()
     {
-        $block_chain = array();
+        $block_chain = [];
 
         // This should return all of our before hooks in the order they *should*
         // have been invoked.
@@ -145,14 +145,14 @@ abstract class Block
      */
     public function invoke()
     {
-        return $this->invokeWithin($this->fn, array($this->createContext()));
+        return $this->invokeWithin($this->fn, [$this->createContext()]);
     }
 
     /**
      * Invokes $fn with $args while managing our internal invocation context
      * in order to ensure our view of the test DSL's call graph is accurate.
      */
-    public function invokeWithin($fn, $args = array())
+    public function invokeWithin($fn, $args = [])
     {
         $this->invocation_context->activate();
 
@@ -225,7 +225,7 @@ abstract class Block
 
     public function ancestors()
     {
-        $ancestors = array();
+        $ancestors = [];
         $block = $this;
 
         while ($block) {
@@ -301,7 +301,7 @@ abstract class Block
     {
         $type = get_class($block);
         if (!isset($this->children[$type])) {
-            $this->children[$type] = array();
+            $this->children[$type] = [];
         }
         $this->children[$type][] = $block;
     }
@@ -309,7 +309,7 @@ abstract class Block
     public function children($of_type)
     {
         if (!isset($this->children[$of_type])) {
-            $this->children[$of_type] = array();
+            $this->children[$of_type] = [];
         }
         return $this->children[$of_type];
     }
