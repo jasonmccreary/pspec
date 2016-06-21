@@ -1,18 +1,13 @@
 <?php namespace Matura\Runners;
 
-use Matura\Matura;
 use Matura\Blocks\Block;
 use Matura\Blocks\Describe;
 use Matura\Blocks\Methods\TestMethod;
 use Matura\Blocks\Suite;
-
-use Matura\Core\ResultSet;
 use Matura\Core\Result;
-
-use Matura\Exceptions\IncompleteException;
-use Matura\Exceptions\SkippedException;
-
+use Matura\Core\ResultSet;
 use Matura\Exceptions\Exception as MaturaException;
+use Matura\Exceptions\SkippedException;
 
 /**
  * Responsible for running a Suite and it's nested Describes, TestMethods, Before\After

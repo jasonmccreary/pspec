@@ -3,7 +3,6 @@
 use Matura\Core\Builder;
 use Matura\Core\ErrorHandler;
 use Matura\Core\TestContext;
-use Matura\Exceptions\Exception;
 
 /**
  * This classes specific role is unclear at the moment. It mostly manages DSL

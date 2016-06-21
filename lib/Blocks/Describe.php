@@ -1,16 +1,5 @@
 <?php namespace Matura\Blocks;
 
-use Matura\Blocks\Methods\TestMethod;
-use Matura\Blocks\Methods\HookMethod;
-
-use Matura\Core\Result;
-
-use Matura\Events\Emitter;
-use Matura\Events\Listener;
-
-use Exception;
-use Matura\Exceptions\Exception as MaturaException;
-
 /**
  * A specialized Block for modelling a test suite.
  *

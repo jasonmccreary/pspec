@@ -1,8 +1,7 @@
 <?php namespace Matura\Core;
 
-use Matura\Exceptions\Exception;
 use Matura\Blocks\Block;
-use Matura\Core\InvocationContext;
+use Matura\Exceptions\Exception;
 
 /**
  * Tracks the call stack for our DSL related methods and provides some tools to

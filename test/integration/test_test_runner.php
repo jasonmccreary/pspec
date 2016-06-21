@@ -1,9 +1,8 @@
 <?php namespace Matura\Tests;
 
-use Matura\Runners\TestRunner;
-use Matura\Runners\SuiteRunner;
 use Matura\Core\ResultSet;
-
+use Matura\Runners\SuiteRunner;
+use Matura\Runners\TestRunner;
 use Mockery;
 
 describe('TestRunner', function ($ctx) {

@@ -2,10 +2,6 @@
 
 use Matura\Core\SuiteRunner;
 
-use Matura\Blocks\Methods\TestMethod;
-use Matura\Blocks\Methods\HookMethod;
-use Matura\Exceptions\Exception;
-
 /**
  * Meant as a top-level container - e.g. 1 per file. This is not enforced, simply
  * discouraged.

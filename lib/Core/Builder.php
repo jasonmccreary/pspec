@@ -1,20 +1,14 @@
 <?php namespace Matura\Core;
 
-use Matura\Exceptions\Exception;
-use Matura\Exceptions\SkippedException;
-
-use Matura\Core\InvocationContext;
-
-use Matura\Blocks\Suite;
-use Matura\Blocks\Describe;
 use Matura\Blocks\Block;
-
+use Matura\Blocks\Describe;
+use Matura\Blocks\Methods\AfterAllHook;
+use Matura\Blocks\Methods\AfterHook;
+use Matura\Blocks\Methods\BeforeAllHook;
+use Matura\Blocks\Methods\BeforeHook;
 use Matura\Blocks\Methods\ExpectMethod;
 use Matura\Blocks\Methods\TestMethod;
-use Matura\Blocks\Methods\BeforeHook;
-use Matura\Blocks\Methods\BeforeAllHook;
-use Matura\Blocks\Methods\AfterHook;
-use Matura\Blocks\Methods\AfterAllHook;
+use Matura\Exceptions\SkippedException;
 
 /**
  * Enables the callback based "sugar" api to work the way it does. It maintains

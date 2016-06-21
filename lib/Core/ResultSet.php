@@ -1,8 +1,7 @@
 <?php namespace Matura\Core;
 
-use IteratorAggregate;
 use ArrayIterator;
-
+use IteratorAggregate;
 use Matura\Blocks\Methods\TestMethod;
 
 class ResultSet implements ResultComponent, IteratorAggregate

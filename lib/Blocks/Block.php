@@ -1,8 +1,7 @@
 <?php namespace Matura\Blocks;
 
-use Matura\Exceptions\SkippedException;
-use Matura\Core\InvocationContext;
 use Matura\Core\Context;
+use Matura\Core\InvocationContext;
 
 abstract class Block
 {

@@ -1,11 +1,8 @@
 <?php namespace Matura\Console\Output;
 
+use Matura\Blocks\Block;
 use Matura\Core\Result;
 use Matura\Events\Event;
-
-use Matura\Blocks\Block;
-use Matura\Blocks\Suite;
-use Matura\Blocks\Describe;
 use Matura\Exceptions\Exception as MaturaException;
 
 function indent_width(Block $block, $per_level = 1)

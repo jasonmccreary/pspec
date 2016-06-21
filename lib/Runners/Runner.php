@@ -1,8 +1,8 @@
 <?php namespace Matura\Runners;
 
-use Matura\Events\Listener;
 use Matura\Events\Emitter;
 use Matura\Events\Event;
+use Matura\Events\Listener;
 
 /**
  * Runners drive our test execution. The TestRunner runs individual test files,

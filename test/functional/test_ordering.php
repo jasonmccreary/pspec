@@ -1,11 +1,8 @@
 <?php namespace Matura\Tests;
 
-use Matura\Test\User;
-use Matura\Test\Group;
-use Matura\Test\Spy;
-
-use Matura\Runners\SuiteRunner;
 use Matura\Core\ResultSet;
+use Matura\Runners\SuiteRunner;
+use Matura\Test\Spy;
 
 // Generates various test trees for us.
 function gentree($spy, $max_depth, $describes, $methods = array())

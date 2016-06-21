@@ -1,7 +1,5 @@
 <?php namespace Matura\Exceptions;
 
-use Matura\Exceptions\Exception;
-
 /**
  * Used when we generated Exceptions via PHP's basic error mechanism.
  */

@@ -1,8 +1,7 @@
 <?php namespace Matura\Tests;
 
-use Matura\Exceptions\Exception;
-use Matura\Test\User;
 use Matura\Test\Group;
+use Matura\Test\User;
 
 describe('Context', function ($ctx) {
     before(function ($ctx) {

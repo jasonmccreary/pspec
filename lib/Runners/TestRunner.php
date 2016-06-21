@@ -1,26 +1,15 @@
 <?php namespace Matura\Runners;
 
-use SplFileInfo;
-use Matura\Matura;
+use ArrayIterator;
+use FilesystemIterator;
 use Matura\Blocks\Suite;
-use Matura\Blocks\Describe;
-use Matura\Blocks\Methods\TestMethod;
-
-use Matura\Core\ResultSet;
-use Matura\Core\Result;
 use Matura\Core\InvocationContext;
-
-use Matura\Events\Listener;
-use Matura\Events\Emitter;
-
+use Matura\Core\ResultSet;
 use Matura\Filters\Defaults;
 use Matura\Filters\FilePathIterator;
-
-use ArrayIterator;
-use RegexIterator;
-use RecursiveIteratorIterator;
 use RecursiveDirectoryIterator;
-use FileSystemIterator;
+use RecursiveIteratorIterator;
+use SplFileInfo;
 
 /**
  * Responsible for invoking files, Suites, and TestMethods.

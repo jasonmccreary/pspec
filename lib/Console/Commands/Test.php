@@ -1,23 +1,16 @@
 <?php namespace Matura\Console\Commands;
 
+use Matura\Console\Output\Printer;
+use Matura\Events\Event;
+use Matura\Events\Listener;
+use Matura\Matura;
+use Matura\Runners\TestRunner;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Formatter\OutputFormatterStyle;
-
-use Matura\Console\Output\Printer;
-
-use Matura\Runners\TestRunner;
-use Matura\Core\ResultSet;
-use Matura\Core\ErrorHandler;
-
-use Matura\Blocks\Suite;
-
-use Matura\Events\Listener;
-use Matura\Events\Event;
-use Matura\Matura;
 
 class Test extends Command implements Listener
 {

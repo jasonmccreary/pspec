@@ -1,8 +1,8 @@
 <?php namespace Matura\Core;
 
-use Matura\Blocks\Block;
-use IteratorAggregate;
 use ArrayIterator;
+use IteratorAggregate;
+use Matura\Blocks\Block;
 
 /**
  * Manages the context variable that is provided to individual tests.
