@@ -43,13 +43,14 @@ class TestRunner extends Runner
      */
     public function collectFiles()
     {
-        if (is_dir($this->path)) {
-            $directory = new RecursiveDirectoryIterator($this->path, FilesystemIterator::SKIP_DOTS);
-            $iterator = new RecursiveIteratorIterator($directory);
-            return new FilePathIterator($iterator, $this->options['include'], $this->options['exclude']);
-        } else {
-            return new ArrayIterator(array(new SplFileInfo($this->path)));
+        if (!is_dir($this->path)) {
+            return new ArrayIterator([new SplFileInfo($this->path)]);
         }
+
+        $directory = new RecursiveDirectoryIterator($this->path, FilesystemIterator::SKIP_DOTS);
+        $iterator = new RecursiveIteratorIterator($directory);
+
+        return new FilePathIterator($iterator, $this->options['include'], $this->options['exclude']);
     }
 
     /**
