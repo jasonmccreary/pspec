@@ -17,11 +17,10 @@ use Matura\Exceptions\SkippedException;
  * know how to run themselves. However, there's a lot of machinery around
  * executing a test such as:
  *
- * 1. Invoking the *_all hooks only once per Suite.
- * 2. Invoking before/after hooks for each method.
- * 3. Wrapping both the hooks and test method execution in our captureResult
+ * 1. Invoking before/after hooks for each method.
+ * 2. Wrapping both the hooks and test method execution in our captureResult
  *    method.
- * 4. Printing results in a somewhat granular fashion (start / complete events).
+ * 3. Printing results in a somewhat granular fashion (start / complete events).
  *
  * That would convolute the responsibilities of our blocks.
  */
@@ -105,20 +104,12 @@ class SuiteRunner extends Runner
             return;
         }
 
-        foreach ($block->beforeAlls() as $before_all) {
-            $before_all->invoke();
-        }
-
         foreach ($block->tests() as $test) {
             $this->runTest($test);
         }
 
         foreach ($block->describes() as $describe) {
             $this->runDescribe($describe);
-        }
-
-        foreach ($block->afterAlls() as $after_all) {
-            $after_all->invoke();
         }
     }
 
@@ -166,8 +157,6 @@ class SuiteRunner extends Runner
     /**
      * @param $owner The Block 'owns' the result of $fn(). E.g. a TestMethod owns
      * the results from all of it's before and after hooks.
-     *
-     * (before_all and after_all hooks are owned by their encompassing Describe)
      *
      * public because @bindshim
      *

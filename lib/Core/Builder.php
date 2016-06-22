@@ -83,27 +83,9 @@ class Builder
         return $test_method;
     }
 
-    /**
-     * Adds a before_all callback to the active block. The active block should
-     * generally be a describe block.
-     */
-    public static function beforeAll($fn)
-    {
-        $test_method = new BeforeAllHook(InvocationContext::getActive(), $fn);
-        $test_method->addToParent();
-        return $test_method;
-    }
-
     public static function after($fn)
     {
         $test_method = new AfterHook(InvocationContext::getActive(), $fn);
-        $test_method->addToParent();
-        return $test_method;
-    }
-
-    public static function afterAll($fn)
-    {
-        $test_method = new AfterAllHook(InvocationContext::getActive(), $fn);
         $test_method->addToParent();
         return $test_method;
     }
@@ -136,8 +118,8 @@ class Builder
      * >>$this->getNameAndSkipFlag('xit');
      * array('it', true);
      *
-     * >>$this->getNameAndSkipFlag('before_all');
-     * array('before_all', false);
+     * >>$this->getNameAndSkipFlag('before');
+     * array('before', false);
      *
      * @return a 2-tuple of a method name and skip flag.
      */

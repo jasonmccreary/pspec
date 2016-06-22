@@ -5,6 +5,9 @@ use Matura\Test\User;
 
 describe('Context', function ($ctx) {
     before(function ($ctx) {
+        $ctx->once_before_scalar = 10;
+        $ctx->group = new Group('admins');
+
         $ctx->before_scalar = 5;
         $ctx->empty_array = array();
         $ctx->false = false;
@@ -12,11 +15,6 @@ describe('Context', function ($ctx) {
         $ctx->func = function ($value) {
             return $value;
         };
-    });
-
-    before_all(function ($ctx) {
-        $ctx->once_before_scalar = 10;
-        $ctx->group = new Group('admins');
     });
 
     it('should return null for an undefined value', function ($ctx) {
@@ -60,11 +58,8 @@ describe('Context', function ($ctx) {
     });
 
     describe('Sibling-Of `Isolation` Block', function ($ctx) {
-        before_all(function ($ctx) {
-            $ctx->once_before_scalar = 15;
-        });
-
         before(function ($ctx) {
+            $ctx->once_before_scalar = 15;
             $ctx->before_scalar = 10;
             $ctx->group = new Group('staff');
         });

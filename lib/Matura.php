@@ -17,20 +17,16 @@ class Matura
      *  DSL.
      */
     protected static $method_names = [
-        'it',
-        'xit',
-        'before_all',
-        'xbefore_all',
         'before',
         'xbefore',
         'after',
         'xafter',
-        'after_all',
-        'xafter_all',
         'describe',
         'xdescribe',
         'context',
         'xcontext',
+        'it',
+        'xit',
         'expect',
         'skip'
     ];

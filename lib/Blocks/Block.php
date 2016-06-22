@@ -118,11 +118,7 @@ abstract class Block
         // This should return all of our before hooks in the order they *should*
         // have been invoked.
         $this->traversePost(function ($block) use (&$block_chain) {
-            // Ensure ordering - even if the test defininition interleaves
-            // before_all with before DSL invocations, we traverse the context
-            // according to the 'before_alls before befores' convention.
-            $befores = array_merge($block->beforeAlls(), $block->befores());
-            $block_chain = array_merge($block_chain, $befores);
+            $block_chain = array_merge($block_chain, $block->befores());
         });
 
         return array_filter(
@@ -340,21 +336,5 @@ abstract class Block
     public function befores()
     {
         return $this->children('Matura\Blocks\Methods\BeforeHook');
-    }
-
-    /**
-     * @return HookMethod[] All of our current `before_all` hooks.
-     */
-    public function beforeAlls()
-    {
-        return $this->children('Matura\Blocks\Methods\BeforeAllHook');
-    }
-
-    /**
-     * @return HookMethod[] All of our current `after_all` hooks.
-     */
-    public function afterAlls()
-    {
-        return $this->children('Matura\Blocks\Methods\AfterAllHook');
     }
 }

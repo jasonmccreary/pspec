@@ -45,8 +45,6 @@ describe('Ordering', function ($ctx) {
         $suite = gentree($spy, 1, 1, array(
             'before' => 1,
             'after' => 1,
-            'before_all' => 1,
-            'after_all' => 1,
             'it' => 1
         ));
 
@@ -54,11 +52,9 @@ describe('Ordering', function ($ctx) {
         $suite_runner->run();
 
         expect($spy->invocations)->to->eql(array(
-            'before_all.1',
             'before.1',
             'it.1',
-            'after.1',
-            'after_all.1'
+            'after.1'
         ));
     });
 
@@ -68,8 +64,6 @@ describe('Ordering', function ($ctx) {
         $suite = gentree($spy, 1, 1, array(
             'before' => 1,
             'after' => 1,
-            'before_all' => 1,
-            'after_all' => 1,
             'it' => 2
         ));
 
@@ -77,17 +71,12 @@ describe('Ordering', function ($ctx) {
         $suite_runner->run();
 
         expect($spy->invocations)->to->eql(array(
-            'before_all.1',
-
             'before.1',
             'it.1',
             'after.1',
-
             'before.1',
             'it.2',
             'after.1',
-
-            'after_all.1'
         ));
     });
 
@@ -97,8 +86,6 @@ describe('Ordering', function ($ctx) {
         $suite = gentree($spy, 2, 2, array(
             'before' => 1,
             'after' => 1,
-            'before_all' => 1,
-            'after_all' => 1,
             'it' => 2
         ));
 
@@ -106,9 +93,6 @@ describe('Ordering', function ($ctx) {
         $suite_runner->run();
 
         expect($spy->invocations)->to->eql(array(
-            // suite
-            'before_all.1',
-
             // test
             'before.1',
             'it.1',
@@ -120,10 +104,8 @@ describe('Ordering', function ($ctx) {
             'after.1',
 
                 // First describe
-                'describe.1.before_all.1',
-
                 // test
-                'before.1', // This might come as a surprise!
+                'before.1',
                 'describe.1.before.1',
                 'describe.1.it.1',
                 'describe.1.after.1',
@@ -135,11 +117,6 @@ describe('Ordering', function ($ctx) {
                 'describe.1.it.2',
                 'describe.1.after.1',
                 'after.1',
-
-                'describe.1.after_all.1',
-
-                // Second describe
-                'describe.2.before_all.1',
 
                 // test
                 'before.1',
@@ -153,11 +130,7 @@ describe('Ordering', function ($ctx) {
                 'describe.2.before.1',
                 'describe.2.it.2',
                 'describe.2.after.1',
-                'after.1',
-
-                'describe.2.after_all.1',
-
-            'after_all.1'
+                'after.1'
         ));
     });
 });

@@ -6,9 +6,7 @@ class Util
     {
         $config = array_merge(array(
             'befores' => 0,
-            'before_alls' => 0,
             'afters' => 0,
-            'after_alls' => 0,
             'tests' => 1,
             'depth' => 0,
             'describes' => array('L', 'R'),
@@ -19,14 +17,8 @@ class Util
                 'before' => function ($ctx) {
                     $ctx->value = 3;
                 },
-                'before_all' => function ($ctx) {
-                    $ctx->value = 5;
-                },
                 'after' => function ($ctx) {
                     $ctx->value = 7;
-                },
-                'after_all' => function ($ctx) {
-                    $ctx->value = 11;
                 }
             )
         ), $config);
@@ -47,14 +39,6 @@ class Util
 
                 for ($i = 1; $i <= $config['befores']; $i++) {
                     before($config['callbacks']['before']);
-                }
-
-                for ($i = 1; $i <= $config['before_alls']; $i++) {
-                    before_all($config['callbacks']['before_all']);
-                }
-
-                for ($i = 1; $i <= $config['after_alls']; $i++) {
-                    after_all($config['callbacks']['after_all']);
                 }
 
                 for ($i = 1; $i <= $config['afters']; $i++) {

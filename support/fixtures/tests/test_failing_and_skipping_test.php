@@ -1,8 +1,8 @@
 <?php namespace Matura\Test\Examples;
 
-use Matura\Test\User;
-use Matura\Test\Group;
 use Exception;
+use Matura\Test\Group;
+use Matura\Test\User;
 
 describe('Simple Example', function ($ctx) {
     before(function ($ctx) {
@@ -41,11 +41,6 @@ describe('Simple Example', function ($ctx) {
     // Nested blocks help organize tests and allow progressive augmentation of
     // test context.
     describe('Inner Block with Before All and Context Clobbering', function ($ctx) {
-        before_all(function ($ctx) {
-            // Do something costly like purge and re-seed a database.
-            $ctx->purged_database = true;
-        });
-
         before(function ($ctx) {
             $ctx->admins = new Group('modified_admins');
         });

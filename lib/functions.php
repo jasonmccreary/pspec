@@ -16,22 +16,6 @@ namespace  {
         );
     }
 
-    function before_all()
-    {
-        return call_user_func_array(
-            ['\Matura\Core\Builder', 'beforeAll'],
-            func_get_args()
-        );
-    }
-
-    function xbefore_all()
-    {
-        return call_user_func_array(
-            ['\Matura\Core\Builder','xbefore_all'],
-            func_get_args()
-        );
-    }
-
     function before()
     {
         return call_user_func_array(
@@ -60,22 +44,6 @@ namespace  {
     {
         return call_user_func_array(
             ['\Matura\Core\Builder','xafter'],
-            func_get_args()
-        );
-    }
-
-    function after_all()
-    {
-        return call_user_func_array(
-            ['\Matura\Core\Builder', 'afterAll'],
-            func_get_args()
-        );
-    }
-
-    function xafter_all()
-    {
-        return call_user_func_array(
-            ['\Matura\Core\Builder','xafter_all'],
             func_get_args()
         );
     }
