@@ -2,7 +2,7 @@
 
 use ArrayIterator;
 use IteratorAggregate;
-use PSpec\Blocks\Methods\TestMethod;
+use PSpec\Blocks\Methods\Example;
 
 class ResultSet implements ResultComponent, IteratorAggregate
 {
@@ -42,7 +42,7 @@ class ResultSet implements ResultComponent, IteratorAggregate
     {
         return count($this->getWithFilter(function ($result) {
             $invoked = $result->getInvokedBlock();
-            return $invoked instanceof TestMethod && $result->isFailure();
+            return $invoked instanceof Example && $result->isFailure();
         }));
     }
 
@@ -50,7 +50,7 @@ class ResultSet implements ResultComponent, IteratorAggregate
     {
         return count($this->getWithFilter(function ($result) {
             $invoked = $result->getInvokedBlock();
-            return $invoked instanceof TestMethod && $result->isSkipped();
+            return $invoked instanceof Example && $result->isSkipped();
         }));
     }
 
@@ -58,7 +58,7 @@ class ResultSet implements ResultComponent, IteratorAggregate
     {
         return count($this->getWithFilter(function ($result) {
             $invoked = $result->getInvokedBlock();
-            return $invoked instanceof TestMethod && $result->isSuccess();
+            return $invoked instanceof Example && $result->isSuccess();
         }));
     }
 

@@ -2,7 +2,7 @@
 
 use PSpec\Blocks\Block;
 use PSpec\Blocks\Describe;
-use PSpec\Blocks\Methods\TestMethod;
+use PSpec\Blocks\Methods\Example;
 use PSpec\Blocks\Suite;
 use PSpec\Core\Result;
 use PSpec\Core\ResultSet;
@@ -113,7 +113,7 @@ class SuiteRunner extends Runner
         }
     }
 
-    protected function runTest(TestMethod $test)
+    protected function runTest(Example $test)
     {
         if ($this->isFiltered($test)) {
             return;
@@ -210,7 +210,7 @@ class SuiteRunner extends Runner
         };
 
         // Code smell. Consider moving this responsibility to the blocks.
-        if ($block instanceof TestMethod) {
+        if ($block instanceof Example) {
             return $isFiltered($block);
         }
 

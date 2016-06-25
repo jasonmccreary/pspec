@@ -5,7 +5,7 @@ use PSpec\Blocks\Describe;
 use PSpec\Blocks\Methods\AfterHook;
 use PSpec\Blocks\Methods\BeforeHook;
 use PSpec\Blocks\Methods\ExpectMethod;
-use PSpec\Blocks\Methods\TestMethod;
+use PSpec\Blocks\Methods\Example;
 use PSpec\Exceptions\SkippedException;
 
 /**
@@ -52,7 +52,7 @@ class Builder
      */
     public static function describe($name, $fn)
     {
-        $next = new Describe(InvocationContext::getActive(), $fn, $name);
+        $next = new Describe($name, $fn);
         $next->addToParent();
 
         return $next;
@@ -63,8 +63,7 @@ class Builder
      */
     public static function it($name, $fn)
     {
-        $active_block = InvocationContext::getAndAssertActiveBlock('PSpec\Blocks\Describe');
-        $test_method = new TestMethod($active_block, $fn, $name);
+        $test_method = new Example($name, $fn);
         $test_method->addToParent();
 
         return $test_method;
@@ -76,7 +75,7 @@ class Builder
      */
     public static function before($fn)
     {
-        $test_method = new BeforeHook(InvocationContext::getActive(), $fn);
+        $test_method = new BeforeHook($fn);
         $test_method->addToParent();
 
         return $test_method;
@@ -84,7 +83,7 @@ class Builder
 
     public static function after($fn)
     {
-        $test_method = new AfterHook(InvocationContext::getActive(), $fn);
+        $test_method = new AfterHook($fn);
         $test_method->addToParent();
 
         return $test_method;

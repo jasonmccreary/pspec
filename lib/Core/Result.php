@@ -1,7 +1,7 @@
 <?php namespace PSpec\Core;
 
 use PSpec\Blocks\Block;
-use PSpec\Blocks\Methods\TestMethod;
+use PSpec\Blocks\Methods\Example;
 
 class Result implements ResultComponent
 {
@@ -91,7 +91,7 @@ class Result implements ResultComponent
 
     public function isTestMethod()
     {
-        return $this->invoked_block && ($this->invoked_block instanceof TestMethod);
+        return $this->invoked_block && ($this->invoked_block instanceof Example);
     }
 
     public function totalTests()

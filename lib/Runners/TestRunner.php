@@ -66,11 +66,10 @@ class TestRunner extends Runner
 
         foreach ($tests as $test_file) {
             $suite = new Suite(
-                new InvocationContext(),
+                $test_file->getPathName(),
                 function () use ($test_file) {
                     require $test_file;
-                },
-                $test_file->getPathName()
+                }
             );
 
             $suite->build();

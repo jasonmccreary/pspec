@@ -1,5 +1,7 @@
 <?php namespace PSpec\Blocks;
 
+use PSpec\Core\InvocationContext;
+
 /**
  * A specialized Block for modelling a test suite.
  *
@@ -9,6 +11,11 @@
 class Describe extends Block
 {
     protected $listeners = [];
+
+    public function __construct($name, \Closure $closure)
+    {
+        parent::__construct(InvocationContext::getActive(), $closure, $name);
+    }
 
     /**
      * Finds a single TestMethod or Block with a given Path. We will return

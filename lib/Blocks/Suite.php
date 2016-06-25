@@ -1,9 +1,14 @@
 <?php namespace PSpec\Blocks;
 
-use PSpec\Core\SuiteRunner;
+use PSpec\Core\InvocationContext;
 
 class Suite extends Describe
 {
+    public function __construct($name, \Closure $closure)
+    {
+        Block::__construct(new InvocationContext(), $closure, $name);
+    }
+
     public function build()
     {
         $builder_for = function (Block $block) use (&$builder_for) {
