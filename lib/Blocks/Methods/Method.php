@@ -1,6 +1,6 @@
-<?php namespace Matura\Blocks\Methods;
+<?php namespace PSpec\Blocks\Methods;
 
-use Matura\Blocks\Block;
+use PSpec\Blocks\Block;
 
 abstract class Method extends Block
 {

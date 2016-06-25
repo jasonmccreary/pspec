@@ -1,4 +1,4 @@
-<?php namespace Matura\Core;
+<?php namespace PSpec\Core;
 
 class ErrorHandler
 {
@@ -6,7 +6,7 @@ class ErrorHandler
     {
         $default_options = [
             'error_reporting' => error_reporting(),
-            'error_class' => '\Matura\Exceptions\Error'
+            'error_class' => \PSpec\Exceptions\Error::class
         ];
 
         $final_options = array_merge($default_options, $options);

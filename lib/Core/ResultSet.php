@@ -1,8 +1,8 @@
-<?php namespace Matura\Core;
+<?php namespace PSpec\Core;
 
 use ArrayIterator;
 use IteratorAggregate;
-use Matura\Blocks\Methods\TestMethod;
+use PSpec\Blocks\Methods\TestMethod;
 
 class ResultSet implements ResultComponent, IteratorAggregate
 {

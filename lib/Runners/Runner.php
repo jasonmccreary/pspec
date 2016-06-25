@@ -1,7 +1,7 @@
-<?php namespace Matura\Runners;
+<?php namespace PSpec\Runners;
 
-use Matura\Events\Emitter;
-use Matura\Events\Event;
+use PSpec\Events\Emitter;
+use PSpec\Events\Event;
 
 /**
  * Runners drive our test execution. The TestRunner runs individual test files,

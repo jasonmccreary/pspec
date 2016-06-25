@@ -1,8 +1,8 @@
-<?php namespace Matura\Console\Commands;
+<?php namespace PSpec\Console\Commands;
 
-use Matura\Console\Output\Printer;
-use Matura\Matura;
-use Matura\Runners\TestRunner;
+use PSpec\Console\Output\Printer;
+use PSpec\PSpec;
+use PSpec\Runners\TestRunner;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -47,9 +47,9 @@ class Test extends Command
         $test_runner = new TestRunner($path, $options);
         $test_runner->addListener($printer);
 
-        Matura::init();
+        PSpec::init();
         $code = $test_runner->run()->isSuccessful() ? 0 : 1;
-        Matura::cleanup();
+        PSpec::cleanup();
 
         return $code;
     }

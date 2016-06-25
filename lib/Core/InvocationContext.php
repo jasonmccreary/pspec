@@ -1,7 +1,7 @@
-<?php namespace Matura\Core;
+<?php namespace PSpec\Core;
 
-use Matura\Blocks\Block;
-use Matura\Exceptions\Exception;
+use PSpec\Blocks\Block;
+use PSpec\Exceptions\Exception;
 
 /**
  * Tracks the call stack for our DSL related methods and provides some tools to
@@ -31,22 +31,22 @@ class InvocationContext
 
     public function closestSuite()
     {
-        return $this->closest('\Matura\Blocks\Suite');
+        return $this->closest('\PSpec\Blocks\Suite');
     }
 
     public function closestDescribe()
     {
-        return $this->closest('\Matura\Blocks\Describe');
+        return $this->closest('\PSpec\Blocks\Describe');
     }
 
     public function closestTest()
     {
-        return $this->closest('\Matura\Blocks\Methods\TestMethod');
+        return $this->closest('\PSpec\Blocks\Methods\TestMethod');
     }
 
     public function closestBlock()
     {
-        return $this->closest('\Matura\Blocks\Block');
+        return $this->closest('\PSpec\Blocks\Block');
     }
 
     public function closest($name)

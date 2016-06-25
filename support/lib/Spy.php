@@ -1,4 +1,4 @@
-<?php namespace Matura\Test;
+<?php namespace PSpec\Test;
 
 class Spy
 {

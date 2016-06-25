@@ -1,4 +1,4 @@
-<?php namespace Matura\Exceptions;
+<?php namespace PSpec\Exceptions;
 
 class SkippedException extends Exception
 {

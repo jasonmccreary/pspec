@@ -1,9 +1,10 @@
 <?php
 namespace  {
+
     function it()
     {
         return call_user_func_array(
-            ['\Matura\Core\Builder','it'],
+            ['\PSpec\Core\Builder','it'],
             func_get_args()
         );
     }
@@ -11,7 +12,7 @@ namespace  {
     function xit()
     {
         return call_user_func_array(
-            ['\Matura\Core\Builder','xit'],
+            ['\PSpec\Core\Builder','xit'],
             func_get_args()
         );
     }
@@ -19,7 +20,7 @@ namespace  {
     function before()
     {
         return call_user_func_array(
-            ['\Matura\Core\Builder','before'],
+            ['\PSpec\Core\Builder','before'],
             func_get_args()
         );
     }
@@ -27,7 +28,7 @@ namespace  {
     function xbefore()
     {
         return call_user_func_array(
-            ['\Matura\Core\Builder','xbefore'],
+            ['\PSpec\Core\Builder','xbefore'],
             func_get_args()
         );
     }
@@ -35,7 +36,7 @@ namespace  {
     function after()
     {
         return call_user_func_array(
-            ['\Matura\Core\Builder','after'],
+            ['\PSpec\Core\Builder','after'],
             func_get_args()
         );
     }
@@ -43,7 +44,7 @@ namespace  {
     function xafter()
     {
         return call_user_func_array(
-            ['\Matura\Core\Builder','xafter'],
+            ['\PSpec\Core\Builder','xafter'],
             func_get_args()
         );
     }
@@ -51,7 +52,7 @@ namespace  {
     function describe()
     {
         return call_user_func_array(
-            ['\Matura\Core\Builder','describe'],
+            ['\PSpec\Core\Builder','describe'],
             func_get_args()
         );
     }
@@ -59,7 +60,7 @@ namespace  {
     function xdescribe()
     {
         return call_user_func_array(
-            ['\Matura\Core\Builder','xdescribe'],
+            ['\PSpec\Core\Builder','xdescribe'],
             func_get_args()
         );
     }
@@ -67,7 +68,7 @@ namespace  {
     function context()
     {
         return call_user_func_array(
-            ['\Matura\Core\Builder','describe'],
+            ['\PSpec\Core\Builder','describe'],
             func_get_args()
         );
     }
@@ -75,7 +76,7 @@ namespace  {
     function xcontext()
     {
         return call_user_func_array(
-            ['\Matura\Core\Builder','xdescribe'],
+            ['\PSpec\Core\Builder','xdescribe'],
             func_get_args()
         );
     }
@@ -83,7 +84,7 @@ namespace  {
     function expect()
     {
         return call_user_func_array(
-            ['\Matura\Core\Builder','expect'],
+            ['\PSpec\Core\Builder','expect'],
             func_get_args()
         );
     }
@@ -91,7 +92,7 @@ namespace  {
     function skip()
     {
         return call_user_func_array(
-            ['\Matura\Core\Builder','skip'],
+            ['\PSpec\Core\Builder','skip'],
             func_get_args()
         );
     }

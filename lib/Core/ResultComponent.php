@@ -1,4 +1,4 @@
-<?php namespace Matura\Core;
+<?php namespace PSpec\Core;
 
 /**
  * Composite Pattern for Results / ResultSets.

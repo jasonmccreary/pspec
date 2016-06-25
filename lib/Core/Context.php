@@ -1,8 +1,8 @@
-<?php namespace Matura\Core;
+<?php namespace PSpec\Core;
 
 use ArrayIterator;
 use IteratorAggregate;
-use Matura\Blocks\Block;
+use PSpec\Blocks\Block;
 
 /**
  * Manages the context variable that is provided to individual tests.

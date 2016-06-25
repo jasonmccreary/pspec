@@ -1,6 +1,6 @@
-<?php namespace Matura\Blocks;
+<?php namespace PSpec\Blocks;
 
-use Matura\Core\SuiteRunner;
+use PSpec\Core\SuiteRunner;
 
 /**
  * Meant as a top-level container - e.g. 1 per file. This is not enforced, simply

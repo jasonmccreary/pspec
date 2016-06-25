@@ -1,4 +1,4 @@
-<?php namespace Matura\Exceptions;
+<?php namespace PSpec\Exceptions;
 
 class IncompleteException extends Exception
 {

@@ -1,14 +1,13 @@
-<?php namespace Matura;
+<?php namespace PSpec;
 
-use Matura\Core\Builder;
-use Matura\Core\ErrorHandler;
-use Matura\Core\TestContext;
+use PSpec\Core\Builder;
+use PSpec\Core\ErrorHandler;
 
 /**
  * This classes specific role is unclear at the moment. It mostly manages DSL
  * generation.
  */
-class Matura
+class PSpec
 {
     /** @var Builder $builder The active builder object. */
     protected static $error_handler;

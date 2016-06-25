@@ -1,4 +1,4 @@
-<?php namespace Matura\Exceptions;
+<?php namespace PSpec\Exceptions;
 
 /**
  * Used when we generated Exceptions via PHP's basic error mechanism.

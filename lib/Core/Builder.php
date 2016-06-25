@@ -1,14 +1,14 @@
-<?php namespace Matura\Core;
+<?php namespace PSpec\Core;
 
-use Matura\Blocks\Block;
-use Matura\Blocks\Describe;
-use Matura\Blocks\Methods\AfterAllHook;
-use Matura\Blocks\Methods\AfterHook;
-use Matura\Blocks\Methods\BeforeAllHook;
-use Matura\Blocks\Methods\BeforeHook;
-use Matura\Blocks\Methods\ExpectMethod;
-use Matura\Blocks\Methods\TestMethod;
-use Matura\Exceptions\SkippedException;
+use PSpec\Blocks\Block;
+use PSpec\Blocks\Describe;
+use PSpec\Blocks\Methods\AfterAllHook;
+use PSpec\Blocks\Methods\AfterHook;
+use PSpec\Blocks\Methods\BeforeAllHook;
+use PSpec\Blocks\Methods\BeforeHook;
+use PSpec\Blocks\Methods\ExpectMethod;
+use PSpec\Blocks\Methods\TestMethod;
+use PSpec\Exceptions\SkippedException;
 
 /**
  * Enables the callback based "sugar" api to work the way it does. It maintains
@@ -66,7 +66,7 @@ class Builder
      */
     public static function it($name, $fn)
     {
-        $active_block = InvocationContext::getAndAssertActiveBlock('Matura\Blocks\Describe');
+        $active_block = InvocationContext::getAndAssertActiveBlock('PSpec\Blocks\Describe');
         $test_method = new TestMethod($active_block, $fn, $name);
         $test_method->addToParent();
         return $test_method;

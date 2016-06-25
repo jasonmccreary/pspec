@@ -1,7 +1,7 @@
-<?php namespace Matura\Tests;
+<?php namespace PSpec\Tests;
 
-use Matura\Test\Group;
-use Matura\Test\User;
+use PSpec\Test\Group;
+use PSpec\Test\User;
 
 describe('Context', function ($ctx) {
     before(function ($ctx) {
@@ -30,12 +30,12 @@ describe('Context', function ($ctx) {
     });
 
     it('should have a user', function ($ctx) {
-        expect($ctx->user)->to->be->a('\Matura\Test\User');
+        expect($ctx->user)->to->be->a('\PSpec\Test\User');
         expect($ctx->user->name)->to->eql('bob');
     });
 
     it('should have a group', function ($ctx) {
-        expect($ctx->group)->to->be->a('\Matura\Test\Group');
+        expect($ctx->group)->to->be->a('\PSpec\Test\Group');
         expect($ctx->group->name)->to->eql('admins');
     });
 

@@ -1,4 +1,4 @@
-<?php namespace Matura\Blocks\Methods;
+<?php namespace PSpec\Blocks\Methods;
 
 class ExpectMethod extends Method
 {

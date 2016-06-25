@@ -9,6 +9,6 @@
    One should be able to point `bin/mat test` at their test folder and not
    encounter other cruft like fixtures. I had considered making the exlusion
    process operate on a default folder set but I'm not ready to dictate that yet.
- * Putting the DSL methods in the `Matura\Tests` namespace. I was never comfortable
+ * Putting the DSL methods in the `PSpec\Tests` namespace. I was never comfortable
    with the global methods - especially because their exceedingly collision prone
    names.

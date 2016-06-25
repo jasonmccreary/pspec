@@ -1,13 +1,13 @@
-<?php namespace Matura\Runners;
+<?php namespace PSpec\Runners;
 
-use Matura\Blocks\Block;
-use Matura\Blocks\Describe;
-use Matura\Blocks\Methods\TestMethod;
-use Matura\Blocks\Suite;
-use Matura\Core\Result;
-use Matura\Core\ResultSet;
-use Matura\Exceptions\Exception as MaturaException;
-use Matura\Exceptions\SkippedException;
+use PSpec\Blocks\Block;
+use PSpec\Blocks\Describe;
+use PSpec\Blocks\Methods\TestMethod;
+use PSpec\Blocks\Suite;
+use PSpec\Core\Result;
+use PSpec\Core\ResultSet;
+use PSpec\Exceptions\Exception as MaturaException;
+use PSpec\Exceptions\SkippedException;
 
 /**
  * Responsible for running a Suite and it's nested Describes, TestMethods, Before\After

@@ -174,9 +174,9 @@ and making the default filter complex.
 
 ## Authoring Tests
 
-The one key piece is you want to place your tests in the `Matura\Tests` namespace
+The one key piece is you want to place your tests in the `PSpec\Tests` namespace
 if you're not using PHP 5.6. If you're using 5.6 you can import the functions in
-Matura\Tests into your namespace.
+PSpec\Tests into your namespace.
 
 ## Further Documentation
 

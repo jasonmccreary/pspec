@@ -1,7 +1,7 @@
-<?php namespace Matura\Blocks;
+<?php namespace PSpec\Blocks;
 
-use Matura\Core\Context;
-use Matura\Core\InvocationContext;
+use PSpec\Core\Context;
+use PSpec\Core\InvocationContext;
 
 abstract class Block
 {
@@ -281,12 +281,12 @@ abstract class Block
 
     public function closestTest()
     {
-        return $this->closest('Matura\Blocks\Methods\TestMethod');
+        return $this->closest('PSpec\Blocks\Methods\TestMethod');
     }
 
     public function closestSuite()
     {
-        return $this->closest('Matura\Blocks\Suite');
+        return $this->closest('PSpec\Blocks\Suite');
     }
 
     // Retrieving and Filtering Child Blocks
@@ -311,7 +311,7 @@ abstract class Block
 
     public function tests()
     {
-        return $this->children('Matura\Blocks\Methods\TestMethod');
+        return $this->children('PSpec\Blocks\Methods\TestMethod');
     }
 
     /**
@@ -319,7 +319,7 @@ abstract class Block
      */
     public function describes()
     {
-        return $this->children('Matura\Blocks\Describe');
+        return $this->children('PSpec\Blocks\Describe');
     }
 
     /**
@@ -327,7 +327,7 @@ abstract class Block
      */
     public function afters()
     {
-        return $this->children('Matura\Blocks\Methods\AfterHook');
+        return $this->children('PSpec\Blocks\Methods\AfterHook');
     }
 
     /**
@@ -335,6 +335,6 @@ abstract class Block
      */
     public function befores()
     {
-        return $this->children('Matura\Blocks\Methods\BeforeHook');
+        return $this->children('PSpec\Blocks\Methods\BeforeHook');
     }
 }

@@ -1,12 +1,12 @@
-<?php namespace Matura\Runners;
+<?php namespace PSpec\Runners;
 
 use ArrayIterator;
 use FilesystemIterator;
-use Matura\Blocks\Suite;
-use Matura\Core\InvocationContext;
-use Matura\Core\ResultSet;
-use Matura\Filters\Defaults;
-use Matura\Filters\FilePathIterator;
+use PSpec\Blocks\Suite;
+use PSpec\Core\InvocationContext;
+use PSpec\Core\ResultSet;
+use PSpec\Filters\Defaults;
+use PSpec\Filters\FilePathIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;

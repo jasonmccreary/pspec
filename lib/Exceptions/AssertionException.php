@@ -1,4 +1,4 @@
-<?php namespace Matura\Exceptions;
+<?php namespace PSpec\Exceptions;
 
 /**
  * Wraps Assertion Failures. Third-party libraries should have their Exceptions

@@ -1,4 +1,4 @@
-<?php namespace Matura\Blocks;
+<?php namespace PSpec\Blocks;
 
 /**
  * A specialized Block for modelling a test suite.

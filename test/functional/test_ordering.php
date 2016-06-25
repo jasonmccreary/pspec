@@ -1,8 +1,9 @@
-<?php namespace Matura\Tests;
+<?php namespace PSpec\Tests;
 
-use Matura\Core\ResultSet;
-use Matura\Runners\SuiteRunner;
-use Matura\Test\Spy;
+use PSpec\Blocks\Suite;
+use PSpec\Core\ResultSet;
+use PSpec\Runners\SuiteRunner;
+use PSpec\Test\Spy;
 
 // Generates various test trees for us.
 function gentree($spy, $max_depth, $describes, $methods = array())
@@ -33,9 +34,9 @@ function gentree($spy, $max_depth, $describes, $methods = array())
         }
     };
 
-    return suite('Root', function ($ctx) use ($generate) {
+    return new Suite(null, function ($ctx) use ($generate) {
         $generate(1, array());
-    });
+    }, 'Root');
 }
 
 describe('Ordering', function ($ctx) {

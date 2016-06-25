@@ -1,6 +1,6 @@
-<?php namespace Matura\Tests;
+<?php namespace PSpec\Tests;
 
-use Matura\Test\Util;
+use PSpec\Test\Util;
 
 describe('Deep and Branched', function ($ctx) use (&$gensuite) {
     Util::gensuite(array('depth' => 5, 'tests' => 15, 'befores' => 5));

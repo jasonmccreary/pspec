@@ -1,6 +1,6 @@
 {
-    "name": "jacobstr/matura",
-    "description": "A mocha/rspec inspired testing framework for php.",
+    "name": "pureconcepts/pspec",
+    "description": "A mocha/rspec inspired testing framework for PHP.",
     "license": "MIT",
     "authors": [
         {
@@ -8,7 +8,7 @@
             "email": "jacobstr@gmail.com"
         }
     ],
-    "bin" : [ "bin/mat" ],
+    "bin" : [ "bin/pspec" ],
     "require": {
         "esperance/esperance": "dev-master",
         "symfony/console": "^3.1"
@@ -19,11 +19,11 @@
     },
     "autoload" : {
         "psr-4": {
-            "Matura\\": "lib",
-            "Matura\\Test\\": "support/lib"
+            "PSpec\\": "lib",
+            "PSpec\\Test\\": "support/lib"
         }
     },
     "scripts": {
-        "test": "bin/mat test test"
+        "test": "bin/pspec"
     }
 }

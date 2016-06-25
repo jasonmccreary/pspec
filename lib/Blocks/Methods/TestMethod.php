@@ -1,6 +1,6 @@
-<?php namespace Matura\Blocks\Methods;
+<?php namespace PSpec\Blocks\Methods;
 
-use Matura\Exceptions\SkippedException;
+use PSpec\Exceptions\SkippedException;
 
 class TestMethod extends Method
 {

@@ -1,4 +1,4 @@
-<?php namespace Matura\Events;
+<?php namespace PSpec\Events;
 
 class Event
 {

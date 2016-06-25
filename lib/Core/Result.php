@@ -1,7 +1,7 @@
-<?php namespace Matura\Core;
+<?php namespace PSpec\Core;
 
-use Matura\Blocks\Block;
-use Matura\Blocks\Methods\TestMethod;
+use PSpec\Blocks\Block;
+use PSpec\Blocks\Methods\TestMethod;
 
 class Result implements ResultComponent
 {

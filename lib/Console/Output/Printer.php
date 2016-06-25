@@ -1,8 +1,8 @@
-<?php namespace Matura\Console\Output;
+<?php namespace PSpec\Console\Output;
 
-use Matura\Core\Result;
-use Matura\Events\Event;
-use Matura\Exceptions\Exception as MaturaException;
+use PSpec\Core\Result;
+use PSpec\Events\Event;
+use PSpec\Exceptions\Exception as MaturaException;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Output\OutputInterface;
 

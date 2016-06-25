@@ -1,4 +1,4 @@
-<?php namespace Matura\Filters;
+<?php namespace PSpec\Filters;
 
 use FilterIterator;
 use Iterator;
