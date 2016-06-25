@@ -30,16 +30,10 @@ class PSpec
         'skip'
     ];
 
-    public static function loadDSL()
-    {
-        require_once __DIR__ . '/functions.php';
-    }
-
     public static function init()
     {
         $error_handler = new ErrorHandler();
         set_error_handler([$error_handler, 'handleError']);
-        static::loadDSL();
     }
 
     public static function cleanup()

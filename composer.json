@@ -18,6 +18,9 @@
         "mockery/mockery": "^0.9.5"
     },
     "autoload" : {
+        "files": [
+            "lib/functions.php"
+        ],
         "psr-4": {
             "PSpec\\": "lib",
             "PSpec\\Test\\": "support/lib"
