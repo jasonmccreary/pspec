@@ -2,9 +2,7 @@
 
 use PSpec\Blocks\Block;
 use PSpec\Blocks\Describe;
-use PSpec\Blocks\Methods\AfterAllHook;
 use PSpec\Blocks\Methods\AfterHook;
-use PSpec\Blocks\Methods\BeforeAllHook;
 use PSpec\Blocks\Methods\BeforeHook;
 use PSpec\Blocks\Methods\ExpectMethod;
 use PSpec\Blocks\Methods\TestMethod;
@@ -16,9 +14,6 @@ use PSpec\Exceptions\SkippedException;
  */
 class Builder
 {
-    // DSL Dispatch
-    // ############
-    //
     // The global functions defined in functions.php delegate to
     // corresponding methods in the builder object. The syntactic sugar leans
     // on some clever tricks driven by the interaction of the Builder and the
@@ -39,6 +34,7 @@ class Builder
         );
 
         $expect_method->closestTest()->addAssertion();
+
         return $expect_method->invoke();
     }
 
@@ -58,6 +54,7 @@ class Builder
     {
         $next = new Describe(InvocationContext::getActive(), $fn, $name);
         $next->addToParent();
+
         return $next;
     }
 
@@ -69,6 +66,7 @@ class Builder
         $active_block = InvocationContext::getAndAssertActiveBlock('PSpec\Blocks\Describe');
         $test_method = new TestMethod($active_block, $fn, $name);
         $test_method->addToParent();
+
         return $test_method;
     }
 
@@ -80,6 +78,7 @@ class Builder
     {
         $test_method = new BeforeHook(InvocationContext::getActive(), $fn);
         $test_method->addToParent();
+
         return $test_method;
     }
 
@@ -87,6 +86,7 @@ class Builder
     {
         $test_method = new AfterHook(InvocationContext::getActive(), $fn);
         $test_method->addToParent();
+
         return $test_method;
     }
 
@@ -102,14 +102,11 @@ class Builder
         $block = call_user_func_array(['static', $name], $arguments);
 
         if ($skip) {
-            $block->skip('x-ed out');
+            $block->skip();
         }
 
         return $block;
     }
-
-    // DSL Utility Methods
-    // ###################
 
     /**
      * Used to detect skipped versions of methods.
@@ -127,8 +124,8 @@ class Builder
     {
         if ($name[0] == 'x') {
             return [substr($name, 1), true];
-        } else {
-            return [self::$method_map[$name], false];
         }
+
+        return [self::$method_map[$name], false];
     }
 }

@@ -34,6 +34,7 @@ class ResultSet implements ResultComponent, IteratorAggregate
         foreach ($this as $result) {
             $sum += $result->totalAssertions();
         }
+
         return $sum;
     }
 
@@ -57,7 +58,7 @@ class ResultSet implements ResultComponent, IteratorAggregate
     {
         return count($this->getWithFilter(function ($result) {
             $invoked = $result->getInvokedBlock();
-            return $invoked instanceof TestMethod && $result->isSuccessful();
+            return $invoked instanceof TestMethod && $result->isSuccess();
         }));
     }
 
@@ -76,7 +77,7 @@ class ResultSet implements ResultComponent, IteratorAggregate
         return $this->total_tests;
     }
 
-    public function isSuccessful()
+    public function isSuccess()
     {
         return count($this->getWithFilter(function ($result) {
             return $result->isFailure();
@@ -85,7 +86,7 @@ class ResultSet implements ResultComponent, IteratorAggregate
 
     public function isFailure()
     {
-        return ! $this->isSuccessful();
+        return ! $this->isSuccess();
     }
 
     public function isSkipped()
@@ -99,6 +100,7 @@ class ResultSet implements ResultComponent, IteratorAggregate
         foreach ($this->results as $result) {
             $failures = array_merge($failures, $result->getFailures());
         }
+
         return $failures;
     }
 
@@ -108,6 +110,7 @@ class ResultSet implements ResultComponent, IteratorAggregate
         foreach ($this->results as $result) {
             $collection = array_merge($collection, $result->getWithFilter($fn));
         }
+
         return $collection;
     }
 
@@ -117,6 +120,7 @@ class ResultSet implements ResultComponent, IteratorAggregate
         foreach ($this->results as $result) {
             $exceptions = array_merge($exceptions, $result->getExceptions());
         }
+
         return $exceptions;
     }
 
@@ -126,11 +130,11 @@ class ResultSet implements ResultComponent, IteratorAggregate
             return Result::FAILURE;
         } elseif ($this->isSkipped()) {
             return Result::SKIPPED;
-        } elseif ($this->isSuccessful()) { // isSuccess seems more correct.
+        } elseif ($this->isSuccess()) {
             return Result::SUCCESS;
-        } else {
-            return Result::INCOMPLETE;
         }
+
+        return Result::INCOMPLETE;
     }
 
     public function getStatusString()

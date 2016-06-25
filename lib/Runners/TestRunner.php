@@ -14,15 +14,14 @@ use SplFileInfo;
 /**
  * Responsible for invoking files, Suites, and TestMethods.
  *
- * The test envirojnment is set up mostly in #run() where we register our
+ * The test environment is set up mostly in #run() where we register our
  * error handler and load our DSL.
  */
 class TestRunner extends Runner
 {
     protected $options = [
-        'include' => Defaults::MATCH_TEST,
-        'exclude' => Defaults::MATCH_NONE,
-        'grep'    => Defaults::MATCH_ALL
+        'include' => Defaults::MATCH_ALL,
+        'filter' => Defaults::MATCH_ALL
     ];
 
     /** @var The directory or folder containing our test file(s). */
@@ -50,11 +49,11 @@ class TestRunner extends Runner
         $directory = new RecursiveDirectoryIterator($this->path, FilesystemIterator::SKIP_DOTS);
         $iterator = new RecursiveIteratorIterator($directory);
 
-        return new FilePathIterator($iterator, $this->options['include'], $this->options['exclude']);
+        return new FilePathIterator($iterator, $this->options['include']);
     }
 
     /**
-     * Bootstraps parts of our test enviornment and iteratively invokes each
+     * Bootstraps parts of our test environment and iteratively invokes each
      * file.
      *
      * @return ResultSet
@@ -78,10 +77,10 @@ class TestRunner extends Runner
 
             $suite_result = new ResultSet();
             $suite_runner = new SuiteRunner($suite, $suite_result, [
-                'grep' => $this->options['grep']
+                'filter' => $this->options['filter']
             ]);
             $this->result_set->addResult($suite_result);
-            
+
             foreach ($this->listeners as $listener) {
                 $suite_runner->addListener($listener);
             }

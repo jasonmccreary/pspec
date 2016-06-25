@@ -30,6 +30,7 @@ class Describe extends Block
                 return $test;
             }
         }
+
         foreach ($this->describes() as $block) {
             $found = $block->find($path);
             if ($found !== null) {

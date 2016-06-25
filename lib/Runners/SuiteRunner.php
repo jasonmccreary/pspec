@@ -6,7 +6,8 @@ use PSpec\Blocks\Methods\TestMethod;
 use PSpec\Blocks\Suite;
 use PSpec\Core\Result;
 use PSpec\Core\ResultSet;
-use PSpec\Exceptions\Exception as MaturaException;
+use PSpec\Exceptions\AssertionException;
+use PSpec\Exceptions\Exception as PSpecException;
 use PSpec\Exceptions\SkippedException;
 
 /**
@@ -22,7 +23,7 @@ use PSpec\Exceptions\SkippedException;
  *    method.
  * 3. Printing results in a somewhat granular fashion (start / complete events).
  *
- * That would convolute the responsibilities of our blocks.
+ * That would mix the responsibilities of our blocks.
  */
 class SuiteRunner extends Runner
 {
@@ -99,7 +100,6 @@ class SuiteRunner extends Runner
 
     protected function runGroup(Block $block)
     {
-        // Check if the block should run by grepping it and descendants.
         if ($this->isFiltered($block)) {
             return;
         }
@@ -115,7 +115,6 @@ class SuiteRunner extends Runner
 
     protected function runTest(TestMethod $test)
     {
-        // Check grep filter.
         if ($this->isFiltered($test)) {
             return;
         }
@@ -132,7 +131,7 @@ class SuiteRunner extends Runner
         $test_result_set = new ResultSet();
         $test->aroundEach(function ($block) use ($suite_runner, $test_result_set, $test) {
             if ($test_result_set->isFailure()) {
-                $block->skip('Skipping due to earlier failures.');
+                $block->skip();
             }
 
             $result = $suite_runner->captureAround([$block, 'invoke'], $test, $block);
@@ -174,7 +173,7 @@ class SuiteRunner extends Runner
             $return_value = $e;
         } catch (\Exception $e) {
             $status = Result::FAILURE;
-            $return_value = new MaturaException($e->getMessage(), $e->getCode(), $e);
+            $return_value = new PSpecException($e->getMessage(), $e->getCode(), $e);
         }
 
         return new Result($owner, $invoked, $status, $return_value);
@@ -213,20 +212,20 @@ class SuiteRunner extends Runner
         // Code smell. Consider moving this responsibility to the blocks.
         if ($block instanceof TestMethod) {
             return $isFiltered($block);
-        } else {
-            foreach ($block->tests() as $test) {
-                if ($isFiltered($test) === false) {
-                    return false;
-                }
-            }
+        }
 
-            foreach ($block->describes() as $describe) {
-                if ($this->isFiltered($describe) === false) {
-                    return false;
-                }
+        foreach ($block->tests() as $test) {
+            if ($isFiltered($test) === false) {
+                return false;
             }
+        }
+
+        foreach ($block->describes() as $describe) {
+            if ($this->isFiltered($describe) === false) {
+                return false;
+            }
+        }
 
             return true;
-        }
     }
 }

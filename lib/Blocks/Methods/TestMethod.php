@@ -10,6 +10,7 @@ class TestMethod extends Method
         $this->traversePost(function ($block) use (&$befores) {
             $befores = array_merge($befores, $block->befores());
         });
+
         return $befores;
     }
 
@@ -19,6 +20,7 @@ class TestMethod extends Method
         $this->traversePre(function ($block) use (&$afters) {
             $afters = array_merge($afters, $block->afters());
         });
+
         return $afters;
     }
 
@@ -42,8 +44,8 @@ class TestMethod extends Method
                 },
                 [$this->createContext()]
             );
-        } else {
-            return $this->invokeWithin($this->fn, [$this->createContext()]);
         }
+
+        return $this->invokeWithin($this->fn, [$this->createContext()]);
     }
 }

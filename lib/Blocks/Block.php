@@ -5,12 +5,11 @@ use PSpec\Core\InvocationContext;
 
 abstract class Block
 {
-    /** @var Callable $fn The method we're wrapping with testing bacon. */
+    /** @var Callable $fn The method we're wrapping. */
     protected $fn;
 
-    /** @var InvocationContext tracks our Block invocations in order to support
-        * our dsl. */
-    protected $invocation_context;
+    /** @var InvocationContext tracks our Block invocations. */
+    protected $invocationContext;
 
     /** @var Context Contains additional test-specific state. */
     protected $context;
@@ -21,14 +20,11 @@ abstract class Block
      */
     protected $name;
 
-    /** @var Block $parent_block The block within which this method was defined.*/
-    protected $parent_block;
+    /** @var Block $parent The block within which this method was defined. */
+    protected $parent;
 
     /** @var bool $skipped Whether this block was skipped during execution. */
     protected $skipped;
-
-    /** @var bool $skipped An array of reasons for skipping a block. */
-    protected $skipped_because = [];
 
     /** @var bool $invoked Whether this method has been invoked. */
     protected $invoked = false;
@@ -39,10 +35,10 @@ abstract class Block
     /** @var Block[] Child block elements. */
     protected $children = [];
 
-    public function __construct(InvocationContext $invocation_context, $fn = null, $name = null)
+    public function __construct(InvocationContext $invocationContext, $fn = null, $name = null)
     {
-        $this->invocation_context = $invocation_context;
-        $this->parent_block = $invocation_context->activeBlock();
+        $this->invocationContext = $invocationContext;
+        $this->parent = $invocationContext->activeBlock();
         $this->fn = $fn;
         $this->name = $name;
     }
@@ -55,11 +51,10 @@ abstract class Block
      *
      * @return Block $this
      */
-    public function skip($message = '')
+    public function skip()
     {
         if ($this->skipped !== true) {
             $this->skipped = true;
-            $this->skipped_because = $message;
         }
 
         return $this;
@@ -87,11 +82,9 @@ abstract class Block
                 return true;
             }
         }
+
         return false;
     }
-
-    // Test Context Management
-    // #######################
 
     public function createContext()
     {
@@ -104,10 +97,7 @@ abstract class Block
     }
 
     /**
-     * Returns an aray of related contexts, in their intended call order.
-     *
-     * @see test_model.php for assertions against various scenarios in order to
-     * grok the `official` behavior.
+     * Returns an array of related contexts, in their intended call order.
      *
      * @return Context[]
      */
@@ -115,8 +105,6 @@ abstract class Block
     {
         $block_chain = [];
 
-        // This should return all of our before hooks in the order they *should*
-        // have been invoked.
         $this->traversePost(function ($block) use (&$block_chain) {
             $block_chain = array_merge($block_chain, $block->befores());
         });
@@ -131,45 +119,42 @@ abstract class Block
         );
     }
 
-    // Invocation Context Management
-    // #############################
-
     /**
      * Default external invocation method - calls the block originally passed into
      * the constructor along with a new context.
      */
     public function invoke()
     {
-        return $this->invokeWithin($this->fn, [$this->createContext()]);
+        return $this->invokeWithinContext($this->fn, [$this->createContext()]);
     }
 
     /**
      * Invokes $fn with $args while managing our internal invocation context
-     * in order to ensure our view of the test DSL's call graph is accurate.
+     * in order to ensure call graph is accurate.
      */
-    public function invokeWithin($fn, $args = [])
+    public function invokeWithinContext($fn, $args = [])
     {
-        $this->invocation_context->activate();
+        $this->invocationContext->activate();
+        $this->invocationContext->push($this);
 
-        $this->invocation_context->push($this);
         try {
             $result = call_user_func_array($fn, $args);
-            $this->invocation_context->pop();
-            $this->invocation_context->deactivate();
+            $this->invocationContext->pop();
+            $this->invocationContext->deactivate();
             return $result;
         } catch (\Exception $e) {
-            $this->invocation_context->pop();
-            $this->invocation_context->deactivate();
+            $this->invocationContext->pop();
+            $this->invocationContext->deactivate();
             throw $e;
         }
     }
 
     public function addAssertion()
     {
-        $this->assertions++;
+        ++$this->assertions;
     }
 
-    public function getAssertionCount()
+    public function getAssertions()
     {
         return $this->assertions;
     }
@@ -178,7 +163,7 @@ abstract class Block
      * With no arguments, returns the complete path to this block down from it's
      * root ancestor.
      *
-     * @param int $offset Used to arary_slice the intermediate array before implosion.
+     * @param int $offset Used to array_slice the intermediate array before implosion.
      * @param int $length Used to array_slice the intermediate array before implosion.
      */
     public function path($offset = null, $length = null)
@@ -192,18 +177,13 @@ abstract class Block
 
         $ancestors = array_slice(array_reverse($ancestors), $offset, $length);
 
-        $res = implode(":", $ancestors);
-
-        return $res;
+        return implode(":", $ancestors);
     }
 
     public function getName()
     {
         return $this->name;
     }
-
-    // Traversal
-    // #########
 
     public function depth()
     {
@@ -234,17 +214,17 @@ abstract class Block
     public function parentBlock($parent_block = null)
     {
         if (func_num_args()) {
-            $this->parent_block = $parent_block;
+            $this->parent = $parent_block;
             return $this;
-        } else {
-            return $this->parent_block;
         }
+
+        return $this->parent;
     }
 
     public function addToParent()
     {
-        if ($this->parent_block) {
-            $this->parent_block->addChild($this);
+        if ($this->parent) {
+            $this->parent->addChild($this);
         }
     }
 
@@ -273,24 +253,19 @@ abstract class Block
                 return $ancestor;
             }
         }
+
         return null;
     }
 
-    // Traversing Upwards
-    // ##################
-
     public function closestTest()
     {
-        return $this->closest('PSpec\Blocks\Methods\TestMethod');
+        return $this->closest(\PSpec\Blocks\Methods\Example::class);
     }
 
     public function closestSuite()
     {
-        return $this->closest('PSpec\Blocks\Suite');
+        return $this->closest(\PSpec\Blocks\Suite::class);
     }
-
-    // Retrieving and Filtering Child Blocks
-    // #####################################
 
     public function addChild(Block $block)
     {
@@ -298,6 +273,7 @@ abstract class Block
         if (!isset($this->children[$type])) {
             $this->children[$type] = [];
         }
+
         $this->children[$type][] = $block;
     }
 
@@ -306,35 +282,27 @@ abstract class Block
         if (!isset($this->children[$of_type])) {
             $this->children[$of_type] = [];
         }
+
         return $this->children[$of_type];
     }
 
     public function tests()
     {
-        return $this->children('PSpec\Blocks\Methods\TestMethod');
+        return $this->children(\PSpec\Blocks\Methods\Example::class);
     }
 
-    /**
-     * @var Block[] This Method's nested blocks.
-     */
     public function describes()
     {
-        return $this->children('PSpec\Blocks\Describe');
+        return $this->children(\PSpec\Blocks\Describe::class);
     }
 
-    /**
-     * @return HookMethod[] All of our current `after` hooks.
-     */
     public function afters()
     {
-        return $this->children('PSpec\Blocks\Methods\AfterHook');
+        return $this->children(\PSpec\Blocks\Methods\AfterHook::class);
     }
 
-    /**
-     * @return HookMethod[] All of our current `before` hooks.
-     */
     public function befores()
     {
-        return $this->children('PSpec\Blocks\Methods\BeforeHook');
+        return $this->children(\PSpec\Blocks\Methods\BeforeHook::class);
     }
 }

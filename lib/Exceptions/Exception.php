@@ -9,11 +9,10 @@ class Exception extends \Exception
 
     public function originalTrace()
     {
-
         if ($previous = $this->getPrevious()) {
             return $previous->getTrace();
-        } else {
-            return $this->getTrace();
         }
+
+        return $this->getTrace();
     }
 }

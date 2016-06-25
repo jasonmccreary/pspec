@@ -5,7 +5,7 @@ use PSpec\Blocks\Block;
 abstract class Method extends Block
 {
     /**
-     * Allows Method Block to act as callables. It somewhat nice ,a
+     * Allows Method Block to act as callables.
      */
     public function __invoke($arguments)
     {

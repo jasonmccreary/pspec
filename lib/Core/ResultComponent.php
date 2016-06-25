@@ -24,7 +24,7 @@ interface ResultComponent
     // ##############
 
     /** @return bool */
-    public function isSuccessful();
+    public function isSuccess();
 
     /** @return bool */
     public function isFailure();

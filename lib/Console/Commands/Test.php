@@ -32,9 +32,6 @@ class Test extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
-        $printer = new Printer($output);
-
         $path = $input->getArgument('path');
 
         $options = [];
@@ -44,13 +41,14 @@ class Test extends Command
             $options['filter'] = "/$filter/i";
         }
 
+        $printer = new Printer($output);
         $test_runner = new TestRunner($path, $options);
         $test_runner->addListener($printer);
 
         PSpec::init();
-        $code = $test_runner->run()->isSuccessful() ? 0 : 1;
+        $exit_code = $test_runner->run()->isSuccess() ? 0 : 1;
         PSpec::cleanup();
 
-        return $code;
+        return $exit_code;
     }
 }

@@ -19,7 +19,7 @@ use PSpec\Blocks\Block;
  * modify the context. Of course, if you've got an an object and you're modifying
  * it's internal state, we don't try to prevent that.
  *
- * Second, the behavior may be exploited. One of the ideas guiding Matura's
+ * Second, the behavior may be exploited. One of the ideas guiding PSpec's
  * nesting strategy is you want to be able to move from general to specific,
  * augmenting the context along the way. Two blocks may share a common ancestor
  * that defines some base context and in turn, they can modify this context
@@ -39,6 +39,11 @@ class Context implements IteratorAggregate
     public function __construct(Block $block)
     {
         $this->block = $block;
+    }
+
+    public function __set($name, $value)
+    {
+        $this->context[$name] = $value;
     }
 
     public function __get($name)
@@ -77,14 +82,7 @@ class Context implements IteratorAggregate
 
     public function getImmediate($key)
     {
-        return array_key_exists($key, $this->context) ? $this->context[$key] :  null;
-    }
-    /**
-     * Sets a value. Always on myself and never on member of the context chain.
-     */
-    public function __set($name, $value)
-    {
-        $this->context[$name] = $value;
+        return array_key_exists($key, $this->context) ? $this->context[$key] : null;
     }
 
     public function getIterator()

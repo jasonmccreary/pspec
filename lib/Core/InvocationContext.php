@@ -31,22 +31,22 @@ class InvocationContext
 
     public function closestSuite()
     {
-        return $this->closest('\PSpec\Blocks\Suite');
+        return $this->closest(\PSpec\Blocks\Suite::class);
     }
 
     public function closestDescribe()
     {
-        return $this->closest('\PSpec\Blocks\Describe');
+        return $this->closest(\PSpec\Blocks\Describe::class);
     }
 
     public function closestTest()
     {
-        return $this->closest('\PSpec\Blocks\Methods\TestMethod');
+        return $this->closest(\PSpec\Blocks\Methods\Example::class);
     }
 
     public function closestBlock()
     {
-        return $this->closest('\PSpec\Blocks\Block');
+        return $this->closest(\PSpec\Blocks\Block::class);
     }
 
     public function closest($name)
@@ -114,6 +114,7 @@ class InvocationContext
         if (!is_a($active_block->activeBlock(), $type)) {
             throw new Exception("Improperly nested block. Expected a $type, got a $current");
         }
+
         return $active_block;
     }
 }

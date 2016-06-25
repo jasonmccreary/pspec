@@ -10,23 +10,18 @@ use Iterator;
 class FilePathIterator extends FilterIterator
 {
     private $basename_include;
-    private $basename_exclude;
 
     public function __construct(
         Iterator $iterator,
-        $basename_include = Defaults::MATCH_ALL,
-        $basename_exclude = Defaults::EXCLUDE
+        $basename_include = Defaults::MATCH_ALL
     ) {
         parent::__construct($iterator);
         $this->basename_include = $basename_include;
-        $this->basename_exclude = $basename_exclude;
     }
 
     public function accept()
     {
         $file_info = $this->getInnerIterator()->current();
-        return preg_match($this->basename_include, $file_info->getBaseName())
-            && !preg_match($this->basename_exclude, $file_info->getBaseName());
-
+        return $this->basename_include === Defaults::MATCH_ALL || preg_match($this->basename_include, $file_info->getBaseName());
     }
 }

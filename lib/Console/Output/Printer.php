@@ -2,10 +2,9 @@
 
 use PSpec\Core\Result;
 use PSpec\Events\Event;
-use PSpec\Exceptions\Exception as MaturaException;
+use PSpec\Exceptions\Exception as PSpecException;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Output\OutputInterface;
-
 
 /**
  * Contains test rendering methods.
@@ -81,7 +80,8 @@ class Printer
         $this->output->write($icon_map[$status]);
     }
 
-    public function onTestRunStart() {
+    public function onTestRunStart()
+    {
         $this->output->writeln('Running:');
     }
 
@@ -136,7 +136,7 @@ class Printer
         ));
     }
 
-    protected function formatTrace(MaturaException $exception)
+    protected function formatTrace(PSpecException $exception)
     {
         $index = 0;
         $result = [];
