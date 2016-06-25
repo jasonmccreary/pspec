@@ -15,18 +15,18 @@ class Test extends Command
     {
         $this
             ->setName('test')
-            ->setDescription('Run tests')
+            ->setDescription('Run specs')
             ->addArgument(
                 'path',
                 InputArgument::OPTIONAL,
-                'The path to the file or directory to test.',
-                'test'
+                'The path to a spec file or directory containing specs.',
+                'specs'
             )
             ->addOption(
                 'filter',
                 null,
                 InputOption::VALUE_REQUIRED,
-                'Filter individual test cases by a description regexp.'
+                'Filter individual spec files by name.'
             );
     }
 
