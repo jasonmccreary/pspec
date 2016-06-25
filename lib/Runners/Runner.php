@@ -2,7 +2,6 @@
 
 use Matura\Events\Emitter;
 use Matura\Events\Event;
-use Matura\Events\Listener;
 
 /**
  * Runners drive our test execution. The TestRunner runs individual test files,
@@ -20,7 +19,7 @@ abstract class Runner implements Emitter
 
     protected $result_set;
 
-    public function addListener(Listener $listener)
+    public function addListener($listener)
     {
         $this->listeners[] = $listener;
     }
@@ -33,15 +32,13 @@ abstract class Runner implements Emitter
         }
     }
 
-    protected function invokeEventHandler(Event $event, Listener $listener)
+    protected function invokeEventHandler(Event $event, $listener)
     {
         $parts = array_map('ucfirst', array_filter(preg_split('/_|\./', $event->name)));
         $name = 'on'.implode($parts);
 
         if (is_callable([$listener, $name])) {
             return call_user_func([$listener, $name], $event);
-        } else {
-            return call_user_func([$listener, 'onMaturaEvent'], $event);
         }
     }
 

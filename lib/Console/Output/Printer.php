@@ -1,48 +1,19 @@
 <?php namespace Matura\Console\Output;
 
-use Matura\Blocks\Block;
 use Matura\Core\Result;
 use Matura\Events\Event;
 use Matura\Exceptions\Exception as MaturaException;
+use Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use Symfony\Component\Console\Output\OutputInterface;
 
-function indent_width(Block $block, $per_level = 1)
-{
-    $level = $block->depth() - 1;
-    return ($level * $per_level);
-}
-
-function indent($lvl, $string, $per_level = 1)
-{
-    if (empty($string)) {
-        return '';
-    } else {
-        $indent = str_repeat(" ", $lvl*1);
-        return $indent.implode(explode("\n", $string), "\n".$indent);
-    }
-}
-
-function tag($tag)
-{
-    $rest = array_slice(func_get_args(), 1);
-    $text = implode($rest);
-    return "<$tag>$text</$tag>";
-}
-
-function pad_left($length, $string, $char = ' ')
-{
-    return str_pad($string, $length, $char, STR_PAD_LEFT);
-}
-
-function pad_right($length, $string, $char = ' ')
-{
-    return str_pad($string, $length, $char, STR_PAD_RIGHT);
-}
 
 /**
  * Contains test rendering methods.
  */
 class Printer
 {
+    protected $output;
+
     protected $options = [
         'trace_depth' => 7,
         'indent' => 3
@@ -50,124 +21,122 @@ class Printer
 
     protected $test_count = 0;
 
-    public function __construct($options = [])
+    public function __construct(OutputInterface $output)
     {
-        $this->options = array_merge($this->options, $options);
+        $this->output = $output;
+
+        // move elsewhere...
+        $output->getFormatter()->setStyle(
+            'success',
+            new OutputFormatterStyle('green')
+        );
+
+        $output->getFormatter()->setStyle(
+            'failure',
+            new OutputFormatterStyle('red')
+        );
+
+        $output->getFormatter()->setStyle(
+            'info',
+            new OutputFormatterStyle('blue')
+        );
+
+        $output->getFormatter()->setStyle(
+            'skipped',
+            new OutputFormatterStyle('yellow')
+        );
+
+        $output->getFormatter()->setStyle(
+            'incomplete',
+            new OutputFormatterStyle('yellow')
+        );
+
+        $output->getFormatter()->setStyle(
+            'u',
+            new OutputFormatterStyle(null, null, ['underscore'])
+        );
+
+        $output->getFormatter()->setStyle(
+            'suite',
+            new OutputFormatterStyle('yellow', null)
+        );
+
+        $output->getFormatter()->setStyle(
+            'bold',
+            new OutputFormatterStyle('blue', null)
+        );
     }
 
     public function onTestComplete(Event $event)
     {
-        $index        = $this->test_count;
-
-        // Via TestMethod
-        $indent_width = ($event->test->depth() - 1) * 2;
-        $name         = $event->test->getName();
-
-        // Via Result
-        $style        = $event->result->getStatusString();
-        $status       = $event->result->getStatus();
+        $status = $event->result->getStatus();
 
         $icon_map = [
-            Result::SUCCESS => '✓',
-            Result::FAILURE => '✘',
-            Result::SKIPPED => '○',
-            Result::INCOMPLETE => '○'
+            Result::SUCCESS => '.',
+            Result::FAILURE => 'F',
+            Result::SKIPPED => 'X',
+            Result::INCOMPLETE => 'X'
         ];
 
-        $icon = $icon_map[$status];
+        $this->output->write($icon_map[$status]);
+    }
 
-        $preamble = "$icon " . $index . ') ';
-        $preamble = pad_right($indent_width, $preamble, " ");
-
-        return tag($style, $preamble) . $name;
+    public function onTestRunStart() {
+        $this->output->writeln('Running:');
     }
 
     public function onTestRunComplete(Event $event)
     {
-        $summary = [
-            tag("success", "Passed:"),
-            "{$event->result_set->totalSuccesses()} of {$event->result_set->totalTests()}",
-            tag("skipped", "Skipped:"),
-            "{$event->result_set->totalSkipped()}",
-            tag("failure", "Failed:"),
-            "{$event->result_set->totalFailures()}",
-            tag("bold", "Assertions:"),
-            "{$event->result_set->totalAssertions()}"
-        ];
-
-        // The Passed / Failed / Skipped summary
-        $summary = implode(" ", $summary);
-
         // Error formatting.
         $failures = $event->result_set->getFailures();
-        $failure_count = count($failures);
 
         $index = 0;
         $result = [];
         foreach ($failures as $failure) {
             $index++;
-            $result[] = tag("failure", pad_right(4, "$index )")."FAILURE: ". $failure->getBlock()->path());
-            $result[] = $this->formatFailure($index, $failure);
-            $result[] = "";
+            $result[] = self::tag("failure", str_pad("$index ) FAILURE: " . $failure->getBlock()->path(), 4, ' ', STR_PAD_RIGHT));
+            $result[] = $this->formatFailure($failure);
         }
 
-        $result[] = $summary;
+        $this->output->writeln('');
 
-        return implode("\n", $result);
+        $this->output->writeln($result);
+
+        $summary = [
+            self::tag("success", "Passed:"),
+            "{$event->result_set->totalSuccesses()} of {$event->result_set->totalTests()}",
+            self::tag("skipped", "Skipped:"),
+            "{$event->result_set->totalSkipped()}",
+            self::tag("failure", "Failed:"),
+            "{$event->result_set->totalFailures()}",
+            self::tag("bold", "Assertions:"),
+            "{$event->result_set->totalAssertions()}"
+        ];
+
+        $this->output->writeln(implode(" ", $summary));
     }
 
     public function onTestStart(Event $event)
     {
-        $this->test_count++;
+        ++$this->test_count;
     }
 
-    public function onSuiteStart(Event $event)
-    {
-        $label = "Running: ".$event->suite->path();
-
-        return tag("suite", $label."\n");
-    }
-
-    public function onSuiteComplete(Event $event)
-    {
-        return "";
-    }
-
-    public function onDescribeStart(Event $event)
-    {
-        $name = $event->describe->getName();
-        $indent_width = ($event->describe->depth() - 1) * $this->options['indent'];
-        return indent($indent_width, "<bold>$name </bold>", $this->options['indent']);
-    }
-
-    public function onDescribeComplete(Event $event)
-    {
-        if ($event->result->isFailure()) {
-            $name = $event->describe->getName();
-            $indent_width = ($event->describe->depth() - 1) * $this->options['indent'];
-            return indent($indent_width, "<failure>Describe $name Failed</failure>", $this->options['indent']);
-        }
-    }
-
-    // Formatting helpers
-    // ##################
-
-    protected function formatFailure($index, Result $failure)
+    protected function formatFailure(Result $failure)
     {
         $exception = $failure->getException();
         $exception_category = $failure->getException()->getCategory();
 
-        return indent(4, implode(
+        return self::indent(4, implode(
             "\n",
             [
-                tag("info", $exception_category.': ') . $exception->getMessage(),
-                tag("info", "Via:"),
+                self::tag("info", $exception_category.': ') . $exception->getMessage(),
+                self::tag("info", "Via:"),
                 $this->formatTrace($exception)
             ]
         ));
     }
 
-    public function formatTrace(MaturaException $exception)
+    protected function formatTrace(MaturaException $exception)
     {
         $index = 0;
         $result = [];
@@ -176,7 +145,7 @@ class Printer
         foreach ($sliced_trace as $trace) {
             $index++;
 
-            $parts = [pad_right(4, $index.")")];
+            $parts = [str_pad($index . ')', 4, ' ', STR_PAD_RIGHT)];
 
             if (isset($trace['file'])) {
                 $parts[] = $trace['file'].':'.$trace['line'];
@@ -187,21 +156,25 @@ class Printer
             $result[] = implode(' ', $parts);
         }
 
-        return indent(3, implode("\n", $result));
+        return self::indent(3, implode("\n", $result));
     }
 
-    /**
-     * Conducts our 'event_group.action' => 'onEventGroupAction delegation'
-     */
-    public function renderEvent(Event $event)
+    private static function indent($level, $string)
     {
-        $parts = array_map('ucfirst', array_filter(preg_split('/_|\./', $event->name)));
-        $name = 'on'.implode($parts);
-
-        if (is_callable([$this, $name])) {
-            return call_user_func([$this, $name], $event);
-        } else {
-            return null;
+        if (empty($string)) {
+            return '';
         }
+
+        $indent = str_repeat(" ", $level*1);
+
+        return $indent.implode(explode("\n", $string), "\n".$indent);
+    }
+
+    private static function tag($tag)
+    {
+        $rest = array_slice(func_get_args(), 1);
+        $text = implode($rest);
+
+        return "<$tag>$text</$tag>";
     }
 }

@@ -131,7 +131,6 @@ class SuiteRunner extends Runner
         $suite_runner = $this;
         $test_result_set = new ResultSet();
         $test->aroundEach(function ($block) use ($suite_runner, $test_result_set, $test) {
-            // Skip once we fail.
             if ($test_result_set->isFailure()) {
                 $block->skip('Skipping due to earlier failures.');
             }

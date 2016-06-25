@@ -1,7 +1,7 @@
 <?php namespace Matura\Tests;
 
-use Matura\Test\User;
 use Matura\Test\Group;
+use Matura\Test\User;
 
 describe('Simple Example', function ($ctx) {
     before(function ($ctx) {
