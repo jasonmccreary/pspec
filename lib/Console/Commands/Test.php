@@ -1,7 +1,7 @@
 <?php namespace PSpec\Console\Commands;
 
 use PSpec\Console\Output\Printer;
-use PSpec\PSpec;
+use PSpec\Core\ErrorHandler;
 use PSpec\Runners\TestRunner;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -45,9 +45,10 @@ class Test extends Command
         $test_runner = new TestRunner($path, $options);
         $test_runner->addListener($printer);
 
-        PSpec::init();
+        $error_handler = new ErrorHandler();
+        set_error_handler([$error_handler, 'handleError']);
         $exit_code = $test_runner->run()->isSuccess() ? 0 : 1;
-        PSpec::cleanup();
+        restore_error_handler();
 
         return $exit_code;
     }

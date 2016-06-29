@@ -125,6 +125,6 @@ class Builder
             return [substr($name, 1), true];
         }
 
-        return [self::$method_map[$name], false];
+        return [$name, false];
     }
 }
