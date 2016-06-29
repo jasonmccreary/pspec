@@ -15,10 +15,10 @@
     },
     "autoload" : {
         "files": [
-            "lib/functions.php"
+            "src/functions.php"
         ],
         "psr-4": {
-            "PSpec\\": "lib"
+            "PSpec\\": "src"
         }
     },
     "scripts": {
