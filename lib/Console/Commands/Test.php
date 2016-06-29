@@ -26,7 +26,7 @@ class Test extends Command
                 'filter',
                 null,
                 InputOption::VALUE_REQUIRED,
-                'Filter individual spec files by name.'
+                'Filter specs by filename matching pattern.'
             );
     }
 

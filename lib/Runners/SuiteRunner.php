@@ -27,17 +27,12 @@ use PSpec\Exceptions\SkippedException;
  */
 class SuiteRunner extends Runner
 {
-    protected $options;
     protected $suite;
 
-    public function __construct(Suite $suite, ResultSet $result_set, $options = [])
+    public function __construct(Suite $suite, ResultSet $result_set)
     {
         $this->suite = $suite;
         $this->result_set = $result_set;
-        $this->options = array_merge([
-            'grep' => '//',
-            'except' => null,
-        ], $options);
     }
 
     /**
@@ -100,10 +95,6 @@ class SuiteRunner extends Runner
 
     protected function runGroup(Block $block)
     {
-        if ($this->isFiltered($block)) {
-            return;
-        }
-
         foreach ($block->tests() as $test) {
             $this->runTest($test);
         }
@@ -115,10 +106,6 @@ class SuiteRunner extends Runner
 
     protected function runTest(Example $test)
     {
-        if ($this->isFiltered($test)) {
-            return;
-        }
-
         $start_context = [
             'test' => $test,
             'result_set' => $this->result_set
@@ -177,55 +164,5 @@ class SuiteRunner extends Runner
         }
 
         return new Result($owner, $invoked, $status, $return_value);
-    }
-
-    /**
-     * Checks if the block or any of it's descendants match our grep filter or
-     * do not match our except filter.
-     *
-     * Descendants are checked in order to retain a test even it's parent block
-     * path does not match.
-     */
-    protected function isFiltered(Block $block)
-    {
-        // Skip filtering on implicit Suite block.
-        if ($block instanceof Suite) {
-            return false;
-        }
-
-        $options = &$this->options;
-
-        $isFiltered = function ($block) use (&$options) {
-            $filtered = false;
-
-            if ($options['grep']) {
-                $filtered = $filtered || preg_match($options['grep'], $block->path(0)) === 0;
-            }
-
-            if ($options['except']) {
-                $filtered = $filtered || preg_match($options['except'], $block->path(0)) === 1;
-            }
-
-            return $filtered;
-        };
-
-        // Code smell. Consider moving this responsibility to the blocks.
-        if ($block instanceof Example) {
-            return $isFiltered($block);
-        }
-
-        foreach ($block->tests() as $test) {
-            if ($isFiltered($test) === false) {
-                return false;
-            }
-        }
-
-        foreach ($block->describes() as $describe) {
-            if ($this->isFiltered($describe) === false) {
-                return false;
-            }
-        }
-
-            return true;
     }
 }

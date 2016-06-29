@@ -20,7 +20,6 @@ use SplFileInfo;
 class TestRunner extends Runner
 {
     protected $options = [
-        'include' => Defaults::MATCH_ALL,
         'filter' => Defaults::MATCH_ALL
     ];
 
@@ -49,7 +48,7 @@ class TestRunner extends Runner
         $directory = new RecursiveDirectoryIterator($this->path, FilesystemIterator::SKIP_DOTS);
         $iterator = new RecursiveIteratorIterator($directory);
 
-        return new FilePathIterator($iterator, $this->options['include']);
+        return new FilePathIterator($iterator, $this->options['filter']);
     }
 
     /**
@@ -75,9 +74,7 @@ class TestRunner extends Runner
             $suite->build();
 
             $suite_result = new ResultSet();
-            $suite_runner = new SuiteRunner($suite, $suite_result, [
-                'filter' => $this->options['filter']
-            ]);
+            $suite_runner = new SuiteRunner($suite, $suite_result);
             $this->result_set->addResult($suite_result);
 
             foreach ($this->listeners as $listener) {
