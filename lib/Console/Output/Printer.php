@@ -24,7 +24,11 @@ class Printer
     {
         $this->output = $output;
 
-        // move elsewhere...
+        $output->getFormatter()->setStyle(
+            'info',
+            new OutputFormatterStyle()
+        );
+
         $output->getFormatter()->setStyle(
             'success',
             new OutputFormatterStyle('green')
@@ -36,17 +40,7 @@ class Printer
         );
 
         $output->getFormatter()->setStyle(
-            'info',
-            new OutputFormatterStyle('blue')
-        );
-
-        $output->getFormatter()->setStyle(
             'skipped',
-            new OutputFormatterStyle('yellow')
-        );
-
-        $output->getFormatter()->setStyle(
-            'incomplete',
             new OutputFormatterStyle('yellow')
         );
 
@@ -56,13 +50,8 @@ class Printer
         );
 
         $output->getFormatter()->setStyle(
-            'suite',
-            new OutputFormatterStyle('yellow', null)
-        );
-
-        $output->getFormatter()->setStyle(
             'bold',
-            new OutputFormatterStyle('blue', null)
+            new OutputFormatterStyle(null, null, ['bold'])
         );
     }
 
@@ -71,10 +60,10 @@ class Printer
         $status = $event->result->getStatus();
 
         $icon_map = [
-            Result::SUCCESS => '.',
-            Result::FAILURE => 'F',
-            Result::SKIPPED => 'X',
-            Result::INCOMPLETE => 'X'
+            Result::SUCCESS => $this->tag('success', '.'),
+            Result::FAILURE => $this->tag('failure', 'F'),
+            Result::SKIPPED => $this->tag('skipped', 'X'),
+            Result::INCOMPLETE => $this->tag('skipped', 'X'),
         ];
 
         $this->output->write($icon_map[$status]);
@@ -82,7 +71,9 @@ class Printer
 
     public function onTestRunStart()
     {
+        $this->output->writeln('');
         $this->output->writeln('Running:');
+        $this->output->writeln('');
     }
 
     public function onTestRunComplete(Event $event)
@@ -109,11 +100,12 @@ class Printer
             "{$event->result_set->totalSkipped()}",
             self::tag("failure", "Failed:"),
             "{$event->result_set->totalFailures()}",
-            self::tag("bold", "Assertions:"),
-            "{$event->result_set->totalAssertions()}"
+            "Assertions: {$event->result_set->totalAssertions()}"
         ];
 
+        $this->output->writeln('');
         $this->output->writeln(implode(" ", $summary));
+        $this->output->writeln('');
     }
 
     public function onTestStart(Event $event)
