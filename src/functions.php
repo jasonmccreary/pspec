@@ -98,12 +98,3 @@ if (!function_exists('xcontext')) {
     }
 }
 
-if (!function_exists('expect')) {
-    function expect()
-    {
-        return call_user_func_array(
-            [\PSpec\Core\Builder::class, 'expect'],
-            func_get_args()
-        );
-    }
-}

@@ -14,30 +14,6 @@ use PSpec\Exceptions\SkippedException;
  */
 class Builder
 {
-    // The global functions defined in functions.php delegate to
-    // corresponding methods in the builder object. The syntactic sugar leans
-    // on some clever tricks driven by the interaction of the Builder and the
-    // InvocationContext.
-
-    /**
-     * Begins a fluent expectation using esperance. Invoked when the test is run
-     * (as compared to constructed e.g. describe, before).
-     */
-    public static function expect($obj)
-    {
-        $expect_method = new ExpectMethod(
-            InvocationContext::getActive(),
-            function ($ctx) use (&$obj) {
-                // Should, perhaps be configurable.
-                return new \Esperance\Assertion($obj);
-            }
-        );
-
-        $expect_method->closestTest()->addAssertion();
-
-        return $expect_method->invoke();
-    }
-
     /**
      * Marks the test skipped and throws a SkippedException.
      */
