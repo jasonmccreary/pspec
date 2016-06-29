@@ -1,21 +1,20 @@
 <?php
 namespace PSpec\Console;
 
-use PSpec\Console\Commands\Test;
-use Symfony\Component\Console\Application;
+use PSpec\Console\Commands\PSpec;
 use Symfony\Component\Console\Input\InputInterface;
 
-class PSpec extends Application
+class Application extends \Symfony\Component\Console\Application
 {
     protected function getCommandName(InputInterface $input)
     {
-        return 'test';
+        return 'pspec';
     }
 
     protected function getDefaultCommands()
     {
         $defaultCommands = parent::getDefaultCommands();
-        $defaultCommands[] = new Test();
+        $defaultCommands[] = new PSpec();
 
         return $defaultCommands;
     }

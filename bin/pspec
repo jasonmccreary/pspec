@@ -2,5 +2,5 @@
 <?php
 require 'vendor/autoload.php';
 
-$application = new \PSpec\Console\PSpec('PSpec', '0.1.0');
+$application = new \PSpec\Console\Application('PSpec', '0.1.0');
 $application->run();

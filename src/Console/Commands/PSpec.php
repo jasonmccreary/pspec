@@ -9,12 +9,12 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class Test extends Command
+class PSpec extends Command
 {
     protected function configure()
     {
         $this
-            ->setName('test')
+            ->setName('pspec')
             ->setDescription('Run specs')
             ->addArgument(
                 'path',
