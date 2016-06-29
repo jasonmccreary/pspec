@@ -1,11 +1,11 @@
 {
-    "name": "pureconcepts/pspec",
-    "description": "A mocha/rspec inspired testing framework for PHP.",
+    "name": "jasonmccreary/pspec",
+    "description": "PSpec is a modern, BDD-style testing framework for PHP.",
     "license": "MIT",
     "authors": [
         {
-            "name": "jacobstr",
-            "email": "jacobstr@gmail.com"
+            "name": "Jason McCreary",
+            "email": "jason@pureconcepts.net"
         }
     ],
     "bin" : [ "bin/pspec" ],
