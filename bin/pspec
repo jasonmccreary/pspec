@@ -2,11 +2,5 @@
 <?php
 require 'vendor/autoload.php';
 
-use PSpec\Console\Commands\Test;
-use Symfony\Component\Console\Application;
-
-$command = new Test();
-$application = new Application('PSpec', '0.1.0');
-$application->add($command);
-$application->setDefaultCommand($command->getName());
+$application = new \PSpec\Console\PSpec('PSpec', '0.1.0');
 $application->run();
