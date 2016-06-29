@@ -15,14 +15,6 @@ use PSpec\Exceptions\SkippedException;
 class Builder
 {
     /**
-     * Marks the test skipped and throws a SkippedException.
-     */
-    public static function skip($message = '')
-    {
-        throw new SkippedException($message);
-    }
-
-    /**
      * Begins a new 'describe' block. The callback $fn is invoked when the test
      * suite is run.
      */
