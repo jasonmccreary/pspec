@@ -1,6 +1,10 @@
 language: php
+
 php:
-  - 5.4
-install:
-  - composer install
-script: composer test
+  - '5.5'
+  - '5.6'
+  - '7'
+
+install: composer install
+
+script: bin/pspec

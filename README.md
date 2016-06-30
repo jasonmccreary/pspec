@@ -1,4 +1,7 @@
 # PSpec
+
+[![Build Status](https://travis-ci.org/jasonmccreary/pspec.svg?branch=master)](https://travis-ci.org/jasonmccreary/pspec) [![Latest Stable Version](https://poser.pugx.org/jasonmccreary/pspec/v/stable.png)](https://packagist.org/packages/jasonmccreary/pspec)
+
 PSpec is a modern, BDD-style testing framework for PHP - enabling you to write more readable tests using its simple, conversational DSL and expressive, fluent assertions.
 
 ```php
