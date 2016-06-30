@@ -10,6 +10,7 @@
     ],
     "bin" : [ "bin/pspec" ],
     "require": {
+        "php": ">=5.5",
         "symfony/console": "^3.1",
         "jasonmccreary/expect": "1.*"
     },
