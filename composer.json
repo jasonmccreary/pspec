@@ -10,7 +10,8 @@
     ],
     "bin" : [ "bin/pspec" ],
     "require": {
-        "symfony/console": "^3.1"
+        "symfony/console": "^3.1",
+        "jasonmccreary/expect": "1.*"
     },
     "autoload" : {
         "files": [
