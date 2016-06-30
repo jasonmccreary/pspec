@@ -33,7 +33,7 @@ describe('string functions', function () {
 Install PSpec as a **development** dependency to your project using [Composer](https://getcomposer.org):
 
 ```sh
-composer require --dev jasonmccreary/pspec
+composer require --dev jasonmccreary/pspec:1.*@alpha
 ```
 
 ## Usage
@@ -41,7 +41,7 @@ composer require --dev jasonmccreary/pspec
 Run your tests using the `pspec` command:
 
 ```sh
-vendor\bin\pspec
+vendor/bin/pspec
 ```
 
 ## Documentation
