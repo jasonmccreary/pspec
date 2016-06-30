@@ -1,7 +1,12 @@
 {
     "name": "jasonmccreary/pspec",
     "description": "PSpec is a modern, BDD-style testing framework for PHP.",
+    "keywords": ["bdd", "tdd", "test", "framework"],
     "license": "MIT",
+    "support": {
+        "issues": "https://github.com/jasonmccreary/pspec/issues",
+        "source": "https://github.com/jasonmccreary/pspec"
+    },
     "authors": [
         {
             "name": "Jason McCreary",
@@ -21,8 +26,5 @@
         "psr-4": {
             "PSpec\\": "src"
         }
-    },
-    "scripts": {
-        "pspec": "bin/pspec"
     }
 }
